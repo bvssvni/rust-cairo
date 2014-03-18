@@ -9,25 +9,19 @@ use std;
 /// y_new = yx * x + yy * y + y0;
 /// ```
 ///
-/// double xx; xx component of the affine transformation
-///
-/// double yx; yx component of the affine transformation
-///
-/// double xy; xy component of the affine transformation
-///
-/// double yy; yy component of the affine transformation
-///
-/// double x0; X translation component of the affine transformation
-///
-/// double y0; Y translation component of the affine transformation
-///
 /// Since 1.0
 pub struct Matrix {
+  /// double xx; xx component of the affine transformation
   xx: f64,
+  /// double yx; yx component of the affine transformation
   yx: f64,
+  /// double xy; xy component of the affine transformation
   xy: f64,
+  /// double yy; yy component of the affine transformation
   yy: f64,
+  /// double x0; X translation component of the affine transformation
   x0: f64,
+  /// double y0; Y translation component of the affine transformation
   y0: f64
 }
 
