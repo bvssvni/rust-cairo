@@ -1,60 +1,107 @@
 #[crate_id = "cairo"];
-// #[deny(missing_doc)];
+#[deny(missing_doc)];
 
 //! A Cairo bindings library.
 
 #[link(name = "cairo")]
 extern {}
 
+/// Was removed from std, therefore declared here.
 pub trait DeepClone {
+  /// Does a deep clone of the object.
   fn deep_clone(&self) -> Self;
 }
 
+/// cairo_status_t is used to indicate errors that can occur when using Cairo. In some cases it is returned directly by functions. but when using cairo_t, the last error, if any, is stored in the context and can be retrieved with cairo_status().
+/// 
+/// New entries may be added in future versions. Use cairo_status_to_string() to get a human-readable representation of an error message.
+/// 
+/// Since 1.0
 #[repr(i32)]
 pub enum Status {
+  /// no error has occurred (Since 1.0)
   Success = 0,
+  /// out of memory (Since 1.0)
   NoMemory = 1,
+  /// cairo_restore() called without matching cairo_save() (Since 1.0)
   InvalidRestore = 2,
+  /// no saved group to pop, i.e. cairo_pop_group() without matching cairo_push_group() (Since 1.0)
   InvalidPopGroup = 3,
+  /// no current point defined (Since 1.0)
   NoCurrentPoint = 4,
+  /// invalid matrix (not invertible) (Since 1.0)
   InvalidMatrix = 5,
+  /// invalid value for an input cairo_status_t (Since 1.0)
   InvalidStatus = 6,
+  /// NULL pointer (Since 1.0)
   NullPointer = 7,
+  /// input string not valid UTF-8 (Since 1.0)
   InvalidString = 8,
+  /// input path data not valid (Since 1.0)
   InvalidPathData = 9,
+  /// error while reading from input stream (Since 1.0)
   ReadError = 10,
+  /// error while writing to output stream (Since 1.0)
   WriteError = 11,
+  /// target surface has been finished (Since 1.0)
   SurfaceFinished = 12,
-  TypeMismatch = 13,
-  SurfaceTypeMismatch = 14,
-  PatternTypeMismatch = 15,
-  InvalidContent = 16,
-  InvalidFormat = 17,
-  InvalidVisual = 18,
-  FileNotFound = 19,
-  InvalidDash = 20,
+  /// the surface type is not appropriate for the operation (Since 1.0)
+  SurfaceTypeMismatch = 13,
+  /// the pattern type is not appropriate for the operation (Since 1.0)
+  PatternTypeMismatch = 14,
+  /// invalid value for an input cairo_content_t (Since 1.0)
+  InvalidContent = 15,
+  /// invalid value for an input cairo_format_t (Since 1.0)
+  InvalidFormat = 16,
+  /// invalid value for an input Visual* (Since 1.0)
+  InvalidVisual = 17,
+  /// file not found (Since 1.0)
+  FileNotFound = 18,
+  /// invalid value for a dash setting (Since 1.0)
+  InvalidDash = 19,
+  /// invalid value for a DSC comment (Since 1.2)
   InvalidDSCComment = 21,
+  /// invalid index passed to getter (Since 1.4)
   InvalidIndex = 22,
+  /// clip region not representable in desired format (Since 1.4)
   ClipNotRepresentable = 23,
+  /// error creating or writing to a temporary file (Since 1.6)
   TempFileError = 24,
+  /// invalid value for stride (Since 1.6)
   InvalidStride = 25,
+  /// the font type is not appropriate for the operation (Since 1.8)
   FontTypeMismatch = 26,
+  /// the user-font is immutable (Since 1.8)
   UserFontImmutable = 27,
+  /// error occurred in a user-font callback function (Since 1.8)
   UserFontError = 28,
+  /// negative number used where it is not allowed (Since 1.8)
   NegativeCount = 29,
+  /// input clusters do not represent the accompanying text and glyph array (Since 1.8)
   InvalidClusters = 30,
+  /// invalid value for an input cairo_font_slant_t (Since 1.8)
   InvalidSlant = 31,
+  /// invalid value for an input cairo_font_weight_t (Since 1.8)
   InvalidWeight = 32,
+  /// invalid value (typically too big) for the size of the input (surface, pattern, etc.) (Since 1.10)
   InvalidSize = 33,
+  /// user-font method not implemented (Since 1.10)
   UserFontNotImplemented = 34,
+  /// the device type is not appropriate for the operation (Since 1.10)
   DeviceTypeMismatch = 35,
+  /// an operation to the device caused an unspecified error (Since 1.10)
   DeviceError = 36,
+  /// a mesh pattern construction operation was used outside of a cairo_mesh_pattern_begin_patch()/cairo_mesh_pattern_end_patch() pair (Since 1.12)
   InvalidMeshConstruction = 37,
-  DeviceFinished = 38
+  /// target device has been finished (Since 1.12)
+  DeviceFinished = 38,
+  /// this is a special value indicating the number of status values defined in this enumeration. When using this value, note that the version of cairo at run-time may have additional status values defined than the value of this symbol at compile-time. (Since 1.10)
+  LastStatus = 39,
 }
 
 /// The cairo drawing context
 pub struct Cairo {
+  /// Wraps the Cairo pointer for context.
   opaque: *mut std::libc::c_void
 }
 
