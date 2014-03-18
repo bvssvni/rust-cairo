@@ -12,6 +12,7 @@ use std;
 /// 
 /// Since 1.0
 pub struct Pattern {
+  /// Wraps Cairo pointer of pattern.
   opaque: *mut std::libc::c_void
 }
 
