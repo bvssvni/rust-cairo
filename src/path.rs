@@ -16,6 +16,7 @@ use std;
 ///
 /// Since 1.0
 pub struct Path {
+  /// Wraps Cairo pointer for path.
   opaque: *mut std::libc::c_void
 }
 
