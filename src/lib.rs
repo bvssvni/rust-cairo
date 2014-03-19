@@ -100,7 +100,13 @@ pub enum Status {
   // LastStatus = 39,
 }
 
-/// The cairo drawing context
+/// A Cairo contains the current state of the rendering device, including coordinates of yet to be drawn shapes.
+/// 
+/// Cairo contexts, as Cairo objects are named, are central to cairo and all drawing with cairo is always done to a Cairo object.
+/// 
+/// Memory management of Cairo is done with cairo_reference() and cairo_destroy().
+/// 
+/// Since 1.0
 pub struct Cairo {
   /// Wraps the Cairo pointer for context.
   opaque: *mut std::libc::c_void
