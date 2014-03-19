@@ -12,7 +12,7 @@ pub trait DeepClone {
   fn deep_clone(&self) -> Self;
 }
 
-/// cairo_status_t is used to indicate errors that can occur when using Cairo. In some cases it is returned directly by functions. but when using cairo_t, the last error, if any, is stored in the context and can be retrieved with cairo_status().
+/// cairo_status_t is used to indicate errors that can occur when using Cairo. In some cases it is returned directly by functions. but when using Cairo, the last error, if any, is stored in the context and can be retrieved with cairo_status().
 /// 
 /// New entries may be added in future versions. Use cairo_status_to_string() to get a human-readable representation of an error message.
 /// 
@@ -107,13 +107,13 @@ pub struct Cairo {
 }
 
 impl Cairo {
-  ///  Creates a new cairo_t with all graphics state parameters set to default values and with target as a target surface. The target surface should be constructed with a backend-specific function such as cairo_image_surface_create() (or any other cairo_backend_surface_create() variant).
+  ///  Creates a new Cairo with all graphics state parameters set to default values and with target as a target surface. The target surface should be constructed with a backend-specific function such as cairo_image_surface_create() (or any other cairo_backend_surface_create() variant).
   ///
   /// This function references target, so you can immediately call cairo_surface_destroy() on it if you don't need to maintain a separate reference to it.
   ///
   /// target : target surface for the context
   ///
-  /// Returns : a newly allocated cairo_t with a reference count of 1. The initial reference count should be released with cairo_destroy() when you are done using the cairo_t. This function never returns NULL. If memory cannot be allocated, a special cairo_t object will be returned on which cairo_status() returns CAIRO_STATUS_NO_MEMORY. If you attempt to target a surface which does not support writing (such as cairo_mime_surface_t) then a CAIRO_STATUS_WRITE_ERROR will be raised. You can use this object normally, but no drawing will be done.
+  /// Returns : a newly allocated Cairo with a reference count of 1. The initial reference count should be released with cairo_destroy() when you are done using the Cairo. This function never returns NULL. If memory cannot be allocated, a special Cairo object will be returned on which cairo_status() returns CAIRO_STATUS_NO_MEMORY. If you attempt to target a surface which does not support writing (such as cairo_mime_surface_t) then a CAIRO_STATUS_WRITE_ERROR will be raised. You can use this object normally, but no drawing will be done.
   ///
   /// Since 1.0
   pub fn new(surface: &mut surface::Surface) -> Cairo {
@@ -139,9 +139,9 @@ impl Cairo {
 
   ///  Makes a copy of the current state of cr and saves it on an internal stack of saved states for cr. When cairo_restore() is called, cr will be restored to the saved state. Multiple calls to cairo_save() and cairo_restore() can be nested; each call to cairo_restore() restores the state from the matching paired cairo_save().
   /// 
-  /// It isn't necessary to clear all saved states before a cairo_t is freed. If the reference count of a cairo_t drops to zero in response to a call to cairo_destroy(), any saved states will be freed along with the cairo_t.
+  /// It isn't necessary to clear all saved states before a Cairo is freed. If the reference count of a Cairo drops to zero in response to a call to cairo_destroy(), any saved states will be freed along with the Cairo.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Since 1.0
   pub fn save(&mut self) {
@@ -152,7 +152,7 @@ impl Cairo {
 
   ///  Restores cr to the state saved by a preceding call to cairo_save() and removes that state from the stack of saved states.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Since 1.0
   pub fn restore(&mut self) {
@@ -378,7 +378,7 @@ impl Cairo {
   ///
   /// Note that this option does not affect text rendering, instead see cairo_font_options_set_antialias().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// antialias : the new antialiasing mode
   ///
@@ -434,7 +434,7 @@ impl Cairo {
   ///
   /// See also cairo_set_dash() and cairo_get_dash().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Returns : the length of the dash array, or 0 if no dash array set.
   ///
@@ -448,7 +448,7 @@ impl Cairo {
 
   ///  Gets the current dash array. If not NULL, dashes should be big enough to hold at least the number of values returned by cairo_get_dash_count().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// dashes : return value for the dash array, or NULL
   ///
@@ -472,7 +472,7 @@ impl Cairo {
   ///
   /// The default fill rule is CAIRO_FILL_RULE_WINDING.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// fill_rule : a fill rule, specified as a cairo_fill_rule_t
   ///
@@ -568,7 +568,7 @@ impl Cairo {
   ///
   /// The default line width value is 2.0.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   /// 
   /// width : a line width
   ///
@@ -632,7 +632,7 @@ impl Cairo {
   ///
   /// The default operator is CAIRO_OPERATOR_OVER.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// op : a compositing operator, specified as a cairo_operator_t
   ///
@@ -659,7 +659,7 @@ impl Cairo {
 
   ///  Sets the tolerance used when converting paths into trapezoids. Curved segments of the path will be subdivided until the maximum deviation between the original path and the polygonal approximation is less than tolerance. The default value is 0.1. A larger value will give better performance, a smaller value, better appearance. (Reducing the value from the default value of 0.1 is unlikely to improve appearance significantly.) The accuracy of paths within Cairo is limited by the precision of its internal arithmetic, and the prescribed tolerance is restricted to the smallest representable internal value.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// tolerance : the tolerance, in device units (typically pixels)
   ///
@@ -1013,7 +1013,7 @@ impl Cairo {
 
   ///  Returns the current reference count of cr.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Returns : the current reference count of cr. If the object is a nil object, 0 will be returned.
   ///
@@ -1611,9 +1611,9 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current cairo_font_face_t object in the cairo_t with font_face. The replaced font face in the cairo_t will be destroyed if there are no other references to it.
+  ///  Replaces the current cairo_font_face_t object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// font_face : a cairo_font_face_t, or NULL to restore to the default font
   ///
@@ -1629,7 +1629,7 @@ impl Cairo {
   ///
   /// If text is drawn without a call to cairo_set_font_size(), (nor cairo_set_font_matrix() nor cairo_set_scaled_font()), the default font size is 10.0.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// size : the new font size, in user space units
   ///
@@ -1642,7 +1642,7 @@ impl Cairo {
 
   ///  Sets the current font matrix to matrix. The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see cairo_set_font_size()), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// matrix : a cairo_matrix_t describing a transform to be applied to the current font.
   ///
@@ -1655,7 +1655,7 @@ impl Cairo {
 
   ///  Stores the current font matrix into matrix. See cairo_set_font_matrix().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// matrix : return value for the matrix
   ///
@@ -1669,9 +1669,9 @@ impl Cairo {
   }
 
 
-  ///  Sets a set of custom font rendering options for the cairo_t. Rendering options are derived by merging these options with the options derived from underlying surface; if the value in options has a default value (like CAIRO_ANTIALIAS_DEFAULT), then the value from the surface is used.
+  ///  Sets a set of custom font rendering options for the Cairo. Rendering options are derived by merging these options with the options derived from underlying surface; if the value in options has a default value (like CAIRO_ANTIALIAS_DEFAULT), then the value from the surface is used.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// options : font options to use
   ///
@@ -1684,7 +1684,7 @@ impl Cairo {
 
   ///  Retrieves font rendering options set via cairo_set_font_options. Note that the returned options do not include any options derived from the underlying surface; they are literally the options passed to cairo_set_font_options().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// options : a cairo_font_options_t object into which to store the retrieved options. All existing values are overwritten
   ///
@@ -1695,9 +1695,9 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current cairo_font_face_t object in the cairo_t with font_face. The replaced font face in the cairo_t will be destroyed if there are no other references to it.
+  ///  Replaces the current cairo_font_face_t object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   /// 
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// font_face : a cairo_font_face_t, or NULL to restore to the default font
   ///
@@ -1708,12 +1708,12 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current font face for a cairo_t.
+  ///  Gets the current font face for a Cairo.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Returns :
-  /// 	the current font face. This object is owned by cairo. To keep a reference to it, you must call cairo_font_face_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_font_face_t object will be returned on which cairo_font_face_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_font_face() with a nil font will trigger an error that will shutdown the cairo_t object).
+  /// 	the current font face. This object is owned by cairo. To keep a reference to it, you must call cairo_font_face_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_font_face_t object will be returned on which cairo_font_face_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_font_face() with a nil font will trigger an error that will shutdown the Cairo object).
   /// 
   /// Since 1.0
   pub fn get_font_face(&mut self) -> font::FontFace {
@@ -1723,9 +1723,9 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current font face, font matrix, and font options in the cairo_t with those of the cairo_scaled_font_t. Except for some translation, the current CTM of the cairo_t should be the same as that of the cairo_scaled_font_t, which can be accessed using cairo_scaled_font_get_ctm().
+  ///  Replaces the current font face, font matrix, and font options in the Cairo with those of the cairo_scaled_font_t. Except for some translation, the current CTM of the Cairo should be the same as that of the cairo_scaled_font_t, which can be accessed using cairo_scaled_font_get_ctm().
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// scaled_font : a cairo_scaled_font_t
   ///
@@ -1736,12 +1736,12 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current scaled font for a cairo_t.
+  ///  Gets the current scaled font for a Cairo.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// Returns :
-  /// 	the current scaled font. This object is owned by cairo. To keep a reference to it, you must call cairo_scaled_font_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_scaled_font_t object will be returned on which cairo_scaled_font_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_scaled_font() with a nil font will trigger an error that will shutdown the cairo_t object).
+  /// 	the current scaled font. This object is owned by cairo. To keep a reference to it, you must call cairo_scaled_font_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_scaled_font_t object will be returned on which cairo_scaled_font_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_scaled_font() with a nil font will trigger an error that will shutdown the Cairo object).
   ///
   /// Since 1.4
   pub fn get_scaled_font(&mut self) -> font::ScaledFont {
@@ -1819,7 +1819,7 @@ impl Cairo {
 
   ///  Gets the font extents for the currently selected font.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// extents : a cairo_font_extents_t object into which the results will be stored.
   ///
@@ -1836,7 +1836,7 @@ impl Cairo {
   ///
   /// Note that whitespace characters do not directly contribute to the size of the rectangle (extents.width and extents.height). They do contribute indirectly by changing the position of non-whitespace characters. In particular, trailing whitespace characters are likely to not affect the size of the rectangle, though they will affect the x_advance and y_advance values.
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// utf8 : a NUL-terminated string of text encoded in UTF-8, or NULL
   ///
@@ -1855,7 +1855,7 @@ impl Cairo {
   ///
   /// Note that whitespace glyphs do not contribute to the size of the rectangle (extents.width and extents.height).
   ///
-  /// cr : a cairo_t
+  /// cr : a Cairo
   ///
   /// glyphs : an array of cairo_glyph_t objects
   ///
