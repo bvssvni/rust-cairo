@@ -1,6 +1,6 @@
 //! Describe filter type
 
-///  cairo_filter_t is used to indicate what filtering should be applied when reading pixel values from patterns. See cairo_pattern_set_filter() for indicating the desired filter to be used with a particular pattern.
+/// pattern::filter::Filter is used to indicate what filtering should be applied when reading pixel values from patterns. See cairo_pattern_set_filter() for indicating the desired filter to be used with a particular pattern.
 /// 
 /// Since 1.0
 #[repr(i32)]
