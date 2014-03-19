@@ -49,9 +49,9 @@ pub enum Status {
   SurfaceTypeMismatch = 13,
   /// the pattern type is not appropriate for the operation (Since 1.0)
   PatternTypeMismatch = 14,
-  /// invalid value for an input cairo_content_t (Since 1.0)
+  /// invalid value for an input surface::content::Content (Since 1.0)
   InvalidContent = 15,
-  /// invalid value for an input cairo_format_t (Since 1.0)
+  /// invalid value for an input surface::format::Format (Since 1.0)
   InvalidFormat = 16,
   /// invalid value for an input Visual* (Since 1.0)
   InvalidVisual = 17,
@@ -79,9 +79,9 @@ pub enum Status {
   NegativeCount = 29,
   /// input clusters do not represent the accompanying text and glyph array (Since 1.8)
   InvalidClusters = 30,
-  /// invalid value for an input cairo_font_slant_t (Since 1.8)
+  /// invalid value for an input font::slant::Slant (Since 1.8)
   InvalidSlant = 31,
-  /// invalid value for an input cairo_font_weight_t (Since 1.8)
+  /// invalid value for an input font::weight::Weight (Since 1.8)
   InvalidWeight = 32,
   /// invalid value (typically too big) for the size of the input (surface, pattern, etc.) (Since 1.10)
   InvalidSize = 33,
@@ -113,7 +113,7 @@ impl Cairo {
   ///
   /// target : target surface for the context
   ///
-  /// Returns : a newly allocated Cairo with a reference count of 1. The initial reference count should be released with cairo_destroy() when you are done using the Cairo. This function never returns NULL. If memory cannot be allocated, a special Cairo object will be returned on which cairo_status() returns CAIRO_STATUS_NO_MEMORY. If you attempt to target a surface which does not support writing (such as cairo_mime_surface_t) then a CAIRO_STATUS_WRITE_ERROR will be raised. You can use this object normally, but no drawing will be done.
+  /// Returns : a newly allocated Cairo with a reference count of 1. The initial reference count should be released with cairo_destroy() when you are done using the Cairo. This function never returns NULL. If memory cannot be allocated, a special Cairo object will be returned on which cairo_status() returns CAIRO_STATUS_NO_MEMORY. If you attempt to target a surface which does not support writing then a CAIRO_STATUS_WRITE_ERROR will be raised. You can use this object normally, but no drawing will be done.
   ///
   /// Since 1.0
   pub fn new(surface: &mut surface::Surface) -> Cairo {
@@ -214,7 +214,7 @@ impl Cairo {
   ///
   /// cr : a cairo context
   ///
-  /// content : a cairo_content_t indicating the type of group that will be created
+  /// content : a surface::content::Content indicating the type of group that will be created
   ///
   /// Since 1.2
   pub fn push_group_with_content(&mut self, content: surface::content::Content) {
@@ -244,7 +244,7 @@ impl Cairo {
   /// The behavior of this function is equivalent to the sequence of operations:
   /// 
   /// ```
-  /// cairo_pattern_t *group = cairo_pop_group (cr);
+  /// pattern::Pattern *group = cairo_pop_group (cr);
   /// cairo_set_source (cr, group);
   /// cairo_pattern_destroy (group);
   /// ```
@@ -330,7 +330,7 @@ impl Cairo {
   ///
   /// cr : a cairo context
   ///
-  /// source : a cairo_pattern_t to be used as the source for subsequent drawing operations.
+  /// source : a pattern::Pattern to be used as the source for subsequent drawing operations.
   ///
   /// Since 1.0
   pub fn set_source(&mut self, source: &mut pattern::Pattern) {
@@ -468,13 +468,13 @@ impl Cairo {
     }
   }
 
-  ///  Set the current fill rule within the cairo context. The fill rule is used to determine which regions are inside or outside a complex (potentially self-intersecting) path. The current fill rule affects both cairo_fill() and cairo_clip(). See cairo_fill_rule_t for details on the semantics of each available fill rule.
+  ///  Set the current fill rule within the cairo context. The fill rule is used to determine which regions are inside or outside a complex (potentially self-intersecting) path. The current fill rule affects both cairo_fill() and cairo_clip(). See fill_rule::FillRule for details on the semantics of each available fill rule.
   ///
   /// The default fill rule is CAIRO_FILL_RULE_WINDING.
   ///
   /// cr : a Cairo
   ///
-  /// fill_rule : a fill rule, specified as a cairo_fill_rule_t
+  /// fill_rule : a fill rule, specified as a fill_rule::FillRule
   ///
   /// Since 1.0
   pub fn set_fill_rule(&mut self, fill_rule: fill_rule::FillRule) {
@@ -497,7 +497,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current line cap style within the cairo context. See cairo_line_cap_t for details about how the available line cap styles are drawn.
+  ///  Sets the current line cap style within the cairo context. See line_cap::LineCap for details about how the available line cap styles are drawn.
   ///
   /// As with the other stroke parameters, the current line cap style is examined by cairo_stroke(), cairo_stroke_extents(), and cairo_stroke_to_path(), but does not have any effect during path construction.
   ///
@@ -529,7 +529,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current line join style within the cairo context. See cairo_line_join_t for details about how the available line join styles are drawn.
+  ///  Sets the current line join style within the cairo context. See line_join::LineJoin for details about how the available line join styles are drawn.
   ///
   /// As with the other stroke parameters, the current line join style is examined by cairo_stroke(), cairo_stroke_extents(), and cairo_stroke_to_path(), but does not have any effect during path construction.
   ///
@@ -628,13 +628,13 @@ impl Cairo {
     }
   }
 
-  ///  Sets the compositing operator to be used for all drawing operations. See cairo_operator_t for details on the semantics of each available compositing operator.
+  ///  Sets the compositing operator to be used for all drawing operations. See operator::Operator for details on the semantics of each available compositing operator.
   ///
   /// The default operator is CAIRO_OPERATOR_OVER.
   ///
   /// cr : a Cairo
   ///
-  /// op : a compositing operator, specified as a cairo_operator_t
+  /// op : a compositing operator, specified as a operator::Operator
   ///
   /// Since 1.0
   pub fn set_operator(&mut self, operator: operator::Operator) {
@@ -853,7 +853,7 @@ impl Cairo {
   ///
   /// cr : a cairo context
   ///
-  /// pattern : a cairo_pattern_t
+  /// pattern : a pattern::Pattern
   ///
   /// Since 1.0
   pub fn mask(&mut self, pattern: &mut pattern::Pattern) {
@@ -866,7 +866,7 @@ impl Cairo {
   ///
   /// cr : a cairo context
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// surface_x : X coordinate at which to place the origin of surface
   ///
@@ -1025,7 +1025,7 @@ impl Cairo {
     }
   }
 
-  ///  Creates a copy of the current path and returns it to the user as a cairo_path_t. See cairo_path_data_t for hints on how to iterate over the returned data structure.
+  ///  Creates a copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
   ///
   /// This function will always return a valid pointer, but the result will have no data (data==NULL and num_data==0), if either of the following conditions hold:
   ///
@@ -1045,7 +1045,7 @@ impl Cairo {
   }
 
 
-  ///  Gets a flattened copy of the current path and returns it to the user as a cairo_path_t. See cairo_path_data_t for hints on how to iterate over the returned data structure.
+  ///  Gets a flattened copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
   /// 
   /// This function is like cairo_copy_path() except that any curves in the path will be approximated with piecewise-linear approximations, (accurate to within the current tolerance value). That is, the result is guaranteed to not have any elements of type CAIRO_PATH_CURVE_TO which will instead be replaced by a series of CAIRO_PATH_LINE_TO elements.
   ///
@@ -1066,7 +1066,7 @@ impl Cairo {
     }
   }
 
-  ///  Append the path onto the current path. The path may be either the return value from one of cairo_copy_path() or cairo_copy_path_flat() or it may be constructed manually. See cairo_path_t for details on how the path data structure should be initialized, and note that path->status must be initialized to CAIRO_STATUS_SUCCESS.
+  ///  Append the path onto the current path. The path may be either the return value from one of cairo_copy_path() or cairo_copy_path_flat() or it may be constructed manually. See path::Path for details on how the path data structure should be initialized, and note that path->status must be initialized to CAIRO_STATUS_SUCCESS.
   ///
   /// cr : a cairo context
   ///
@@ -1611,11 +1611,11 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current cairo_font_face_t object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
+  ///  Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   ///
   /// cr : a Cairo
   ///
-  /// font_face : a cairo_font_face_t, or NULL to restore to the default font
+  /// font_face : a font::FontFace, or NULL to restore to the default font
   ///
   /// Since 1.0
   pub fn select_font_face(&mut self, family: &str, slant: font::slant::Slant, weight: font::weight::Weight) {
@@ -1644,7 +1644,7 @@ impl Cairo {
   ///
   /// cr : a Cairo
   ///
-  /// matrix : a cairo_matrix_t describing a transform to be applied to the current font.
+  /// matrix : a matrix::Matrix describing a transform to be applied to the current font.
   ///
   /// Since 1.0
   pub fn set_font_matrix(&mut self, size: &matrix::Matrix) {
@@ -1686,7 +1686,7 @@ impl Cairo {
   ///
   /// cr : a Cairo
   ///
-  /// options : a cairo_font_options_t object into which to store the retrieved options. All existing values are overwritten
+  /// options : a font::Options object into which to store the retrieved options. All existing values are overwritten
   ///
   /// Since 1.0
   pub fn get_font_options(&mut self, options: font::Options) {
@@ -1695,11 +1695,11 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current cairo_font_face_t object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
+  ///  Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   /// 
   /// cr : a Cairo
   ///
-  /// font_face : a cairo_font_face_t, or NULL to restore to the default font
+  /// font_face : a font::FontFace, or NULL to restore to the default font
   ///
   /// Since 1.0
   pub fn set_font_face(&mut self, font_face: font::FontFace) {
@@ -1713,7 +1713,7 @@ impl Cairo {
   /// cr : a Cairo
   ///
   /// Returns :
-  /// 	the current font face. This object is owned by cairo. To keep a reference to it, you must call cairo_font_face_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_font_face_t object will be returned on which cairo_font_face_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_font_face() with a nil font will trigger an error that will shutdown the Cairo object).
+  /// 	the current font face. This object is owned by cairo. To keep a reference to it, you must call cairo_font_face_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" font::FontFace object will be returned on which cairo_font_face_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_font_face() with a nil font will trigger an error that will shutdown the Cairo object).
   /// 
   /// Since 1.0
   pub fn get_font_face(&mut self) -> font::FontFace {
@@ -1723,11 +1723,11 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current font face, font matrix, and font options in the Cairo with those of the cairo_scaled_font_t. Except for some translation, the current CTM of the Cairo should be the same as that of the cairo_scaled_font_t, which can be accessed using cairo_scaled_font_get_ctm().
+  ///  Replaces the current font face, font matrix, and font options in the Cairo with those of the font::ScaledFont. Except for some translation, the current CTM of the Cairo should be the same as that of the font::ScaledFont, which can be accessed using cairo_scaled_font_get_ctm().
   ///
   /// cr : a Cairo
   ///
-  /// scaled_font : a cairo_scaled_font_t
+  /// scaled_font : a font::ScaledFont
   ///
   /// Since 1.2
   pub fn set_scaled_font(&mut self, scaled_font: font::ScaledFont) {
@@ -1741,7 +1741,7 @@ impl Cairo {
   /// cr : a Cairo
   ///
   /// Returns :
-  /// 	the current scaled font. This object is owned by cairo. To keep a reference to it, you must call cairo_scaled_font_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" cairo_scaled_font_t object will be returned on which cairo_scaled_font_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_scaled_font() with a nil font will trigger an error that will shutdown the Cairo object).
+  /// 	the current scaled font. This object is owned by cairo. To keep a reference to it, you must call cairo_scaled_font_reference(). This function never returns NULL. If memory cannot be allocated, a special "nil" font::ScaledFont object will be returned on which cairo_scaled_font_status() returns CAIRO_STATUS_NO_MEMORY. Using this nil object will cause its error state to propagate to other objects it is passed to, (for example, calling cairo_set_scaled_font() with a nil font will trigger an error that will shutdown the Cairo object).
   ///
   /// Since 1.4
   pub fn get_scaled_font(&mut self) -> font::ScaledFont {
@@ -1792,7 +1792,7 @@ impl Cairo {
   ///
   /// The first cluster always covers bytes from the beginning of utf8. If cluster_flags do not have the CAIRO_TEXT_CLUSTER_FLAG_BACKWARD set, the first cluster also covers the beginning of glyphs, otherwise it covers the end of the glyphs array and following clusters move backward.
   ///
-  /// See cairo_text_cluster_t for constraints on valid clusters.
+  /// See font::Cluster for constraints on valid clusters.
   ///
   /// cr : a cairo context
   ///
@@ -1821,7 +1821,7 @@ impl Cairo {
   ///
   /// cr : a Cairo
   ///
-  /// extents : a cairo_font_extents_t object into which the results will be stored.
+  /// extents : a font::FontExtends object into which the results will be stored.
   ///
   /// Since 1.0
   pub fn font_extents(&mut self) -> font::FontExtents {
@@ -1840,7 +1840,7 @@ impl Cairo {
   ///
   /// utf8 : a NUL-terminated string of text encoded in UTF-8, or NULL
   ///
-  /// extents : a cairo_text_extents_t object into which the results will be stored
+  /// extents : a font::TextExtends object into which the results will be stored
   ///
   /// Since 1.0
   pub fn text_extents(&mut self, utf8: &str) -> font::TextExtents {
@@ -1857,11 +1857,11 @@ impl Cairo {
   ///
   /// cr : a Cairo
   ///
-  /// glyphs : an array of cairo_glyph_t objects
+  /// glyphs : an array of font::Glyph objects
   ///
   /// num_glyphs : the number of elements in glyphs
   ///
-  /// extents : a cairo_text_extents_t object into which the results will be stored
+  /// extents : a font::TextExtends object into which the results will be stored
   /// 
   /// Since 1.0
   pub fn glyph_extents(&mut self, glyphs: &[font::Glyph]) -> font::TextExtents {
