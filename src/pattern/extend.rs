@@ -1,6 +1,6 @@
 //! Describe color/alpha for areas "outside" pattern's natural area
 
-///  cairo_extend_t is used to describe how pattern color/alpha will be determined for areas "outside" the pattern's natural area, (for example, outside the surface bounds or outside the gradient geometry).
+/// pattern::extend::Extend is used to describe how pattern color/alpha will be determined for areas "outside" the pattern's natural area, (for example, outside the surface bounds or outside the gradient geometry).
 /// 
 /// Mesh patterns are not affected by the extend mode.
 /// 
