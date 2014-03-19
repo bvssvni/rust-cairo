@@ -8,7 +8,7 @@ use std;
 ///
 /// The num_data member gives the number of elements in the data array. This number is larger than the number of independent path portions (defined in cairo_path_data_type_t), since the data includes both headers and coordinates for each portion.
 ///
-/// cairo_status_t status; the current error status
+/// Status status; the current error status
 ///
 /// cairo_path_data_t *data; the elements in the path
 ///
