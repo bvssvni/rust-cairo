@@ -1,6 +1,6 @@
 //! Describe font type
 
-///  cairo_font_type_t is used to describe the type of a given font face or scaled font. The font types are also known as "font backends" within cairo.
+/// font::font_type::FontType is used to describe the type of a given font face or scaled font. The font types are also known as "font backends" within cairo.
 /// 
 /// The type of a font face is determined by the function used to create it, which will generally be of the form cairo_type_font_face_create(). The font face type can be queried with cairo_font_face_get_type()
 /// 
