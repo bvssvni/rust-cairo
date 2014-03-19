@@ -1,6 +1,6 @@
 //! Identify memory format of image data.
 
-///  cairo_format_t is used to identify the memory format of image data.
+/// surface::format::Format is used to identify the memory format of image data.
 /// 
 /// New entries may be added in future versions.
 /// 
