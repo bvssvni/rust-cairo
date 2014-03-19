@@ -12,7 +12,7 @@ pub trait DeepClone {
   fn deep_clone(&self) -> Self;
 }
 
-/// cairo_status_t is used to indicate errors that can occur when using Cairo. In some cases it is returned directly by functions. but when using Cairo, the last error, if any, is stored in the context and can be retrieved with cairo_status().
+/// Status is used to indicate errors that can occur when using Cairo. In some cases it is returned directly by functions. but when using Cairo, the last error, if any, is stored in the context and can be retrieved with cairo_status().
 /// 
 /// New entries may be added in future versions. Use cairo_status_to_string() to get a human-readable representation of an error message.
 /// 
@@ -31,7 +31,7 @@ pub enum Status {
   NoCurrentPoint = 4,
   /// invalid matrix (not invertible) (Since 1.0)
   InvalidMatrix = 5,
-  /// invalid value for an input cairo_status_t (Since 1.0)
+  /// invalid value for an input Status (Since 1.0)
   InvalidStatus = 6,
   /// NULL pointer (Since 1.0)
   NullPointer = 7,
@@ -127,7 +127,7 @@ impl Cairo {
   ///
   /// cr : a cairo context
   ///
-  /// Returns : the current status of this context, see cairo_status_t
+  /// Returns : the current status of this context, see Status
   ///
   /// Since 1.0
   pub fn status(&mut self) -> Status {
