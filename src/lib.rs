@@ -95,8 +95,9 @@ pub enum Status {
   InvalidMeshConstruction = 37,
   /// target device has been finished (Since 1.12)
   DeviceFinished = 38,
-  /// this is a special value indicating the number of status values defined in this enumeration. When using this value, note that the version of cairo at run-time may have additional status values defined than the value of this symbol at compile-time. (Since 1.10)
-  LastStatus = 39,
+  // this is a special value indicating the number of status values defined in this enumeration. When using this value, note that the version of cairo at run-time may have additional status values defined than the value of this symbol at compile-time. (Since 1.10)
+  // 'LastStatus' is left out because you never should match against it.
+  // LastStatus = 39,
 }
 
 /// The cairo drawing context
