@@ -1,12 +1,12 @@
 //! Describe the type of a given surface.
 
-/// cairo_surface_type_t is used to describe the type of a given surface. The surface types are also known as "backends" or "surface backends" within cairo.
+/// surface::surface_type::SurfaceType is used to describe the type of a given surface. The surface types are also known as "backends" or "surface backends" within cairo.
 /// 
 /// The type of a surface is determined by the function used to create it, which will generally be of the form cairo_type_surface_create(), (though see cairo_surface_create_similar() as well).
 /// 
 /// The surface type can be queried with cairo_surface_get_type()
 /// 
-/// The various cairo_surface_t functions can be used with surfaces of any type, but some backends also provide type-specific functions that must only be called with a surface of the appropriate type. These functions have names that begin with cairo_type_surface such as cairo_image_surface_get_width().
+/// The various surface::Surface functions can be used with surfaces of any type, but some backends also provide type-specific functions that must only be called with a surface of the appropriate type. These functions have names that begin with cairo_type_surface such as cairo_image_surface_get_width().
 /// 
 /// The behavior of calling a type-specific function with a surface of the wrong type is undefined.
 /// 
