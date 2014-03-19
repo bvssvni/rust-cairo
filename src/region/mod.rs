@@ -3,11 +3,11 @@
 use std;
 use super::DeepClone;
 
-///  A cairo_region_t represents a set of integer-aligned rectangles.
+/// A region::Region represents a set of integer-aligned rectangles.
 /// 
 /// It allows set-theoretical operations like cairo_region_union() and cairo_region_intersect() to be performed on them.
 /// 
-/// Memory management of cairo_region_t is done with cairo_region_reference() and cairo_region_destroy().
+/// Memory management of region::Region is done with cairo_region_reference() and cairo_region_destroy().
 /// 
 /// Since 1.10
 pub struct Region {
@@ -32,7 +32,7 @@ pub struct Rectangle {
 impl Region {
   ///  Allocates a new empty region object.
   /// 
-  /// Returns : A newly allocated cairo_region_t. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
+  /// Returns : A newly allocated region::Region. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
   ///
   /// Since 1.10
   pub fn new() -> Region {
@@ -44,9 +44,9 @@ impl Region {
 
   ///  Allocates a new region object containing rectangle.
   /// 
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   /// 
-  /// Returns : A newly allocated cairo_region_t. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
+  /// Returns : A newly allocated region::Region. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
   /// 
   /// Since 1.10
   pub fn rectangle(rectangle: &Rectangle) -> Region {
@@ -62,7 +62,7 @@ impl Region {
   ///
   /// count : number of rectangles
   ///
-  /// Returns : A newly allocated cairo_region_t. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
+  /// Returns : A newly allocated region::Region. Free with cairo_region_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_region_status().
   /// 
   /// Since 1.10
   pub fn rectangles(rectangles: &[Rectangle]) -> Region {
@@ -74,7 +74,7 @@ impl Region {
 
   ///  Checks whether an error has previous occurred for this region object.
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -86,9 +86,9 @@ impl Region {
     }
   }
 
-  ///  Gets the bounding rectangle of region as a cairo_rectangle_int_t
+  ///  Gets the bounding rectangle of region as a region::Rectangle
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// extents : rectangle into which to store the extents
   ///
@@ -103,7 +103,7 @@ impl Region {
 
   ///  Returns the number of rectangles contained in region.
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   /// 
   /// Returns : The number of rectangles contained in region.
   /// 
@@ -117,11 +117,11 @@ impl Region {
 
   ///  Stores the nth rectangle from the region in rectangle.
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// nth : a number indicating which rectangle should be returned
   ///
-  /// rectangle : return location for a cairo_rectangle_int_t
+  /// rectangle : return location for a region::Rectangle
   ///
   /// Since 1.10
   pub fn get_rectangle(&mut self, nth: i32) -> Rectangle {
@@ -134,7 +134,7 @@ impl Region {
 
   ///  Checks whether region is empty.
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// Returns : TRUE if region is empty, FALSE if it isn't.
   ///
@@ -148,7 +148,7 @@ impl Region {
 
   ///  Checks whether (x, y) is contained in region.
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// x : the x coordinate of a point
   ///
@@ -166,9 +166,9 @@ impl Region {
 
   ///  Checks whether rectangle is inside, outside or partially contained in region
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   /// 
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   /// 
   /// Returns : CAIRO_REGION_OVERLAP_IN if rectangle is entirely inside region, CAIRO_REGION_OVERLAP_OUT if rectangle is entirely outside region, or CAIRO_REGION_OVERLAP_PART if rectangle is partially inside and partially outside region.
   /// 
@@ -182,9 +182,9 @@ impl Region {
 
   ///  Compares whether region_a is equivalent to region_b. NULL as an argument is equal to itself, but not to any non-NULL region.
   ///
-  /// a : a cairo_region_t or NULL
+  /// a : a region::Region or NULL
   ///
-  /// b : a cairo_region_t or NULL
+  /// b : a region::Region or NULL
   ///
   /// Returns : TRUE if both regions contained the same coverage, FALSE if it is not or any region is in an error status.
   /// 
@@ -198,7 +198,7 @@ impl Region {
 
   ///  Translates region by (dx, dy).
   /// 
-  /// region : a cairo_region_t
+  /// region : a region::Region
   ///
   /// dx : Amount to translate in the x direction
   ///
@@ -213,9 +213,9 @@ impl Region {
 
   ///  Computes the intersection of dst with rectangle and places the result in dst
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -229,9 +229,9 @@ impl Region {
 
   ///  Subtracts other from dst and places the result in dst
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// other : another cairo_region_t
+  /// other : another region::Region
   /// 
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   /// 
@@ -245,9 +245,9 @@ impl Region {
 
   ///  Subtracts rectangle from dst and places the result in dst
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -261,9 +261,9 @@ impl Region {
 
   ///  Computes the union of dst with other and places the result in dst
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// other : another cairo_region_t
+  /// other : another region::Region
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -277,9 +277,9 @@ impl Region {
 
   ///  Computes the union of dst with rectangle and places the result in dst.
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -293,9 +293,9 @@ impl Region {
 
   ///  Computes the exclusive difference of dst with other and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in other, but not in both.
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// other : another cairo_region_t
+  /// other : another region::Region
   /// 
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
@@ -309,9 +309,9 @@ impl Region {
 
   ///  Computes the exclusive difference of dst with rectangle and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in rectangle, but not in both.
   /// 
-  /// dst : a cairo_region_t
+  /// dst : a region::Region
   ///
-  /// rectangle : a cairo_rectangle_int_t
+  /// rectangle : a region::Rectangle
   ///
   /// Returns : CAIRO_STATUS_SUCCESS or CAIRO_STATUS_NO_MEMORY
   ///
