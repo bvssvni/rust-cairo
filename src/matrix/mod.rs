@@ -2,7 +2,7 @@
 
 use std;
 
-///  A cairo_matrix_t holds an affine transformation, such as a scale, rotation, shear, or a combination of those. The transformation of a point (x, y) is given by:
+///  A matrix::Matrix holds an affine transformation, such as a scale, rotation, shear, or a combination of those. The transformation of a point (x, y) is given by:
 ///
 /// ```
 /// x_new = xx * x + xy * y + x0;
@@ -33,7 +33,7 @@ impl Matrix {
   /// y_new = yx * x + yy * y + y0;
   /// ```
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// xx : xx component of the affine transformation
   ///
@@ -58,7 +58,7 @@ impl Matrix {
 
   ///  Modifies matrix to be an identity transformation.
   /// 
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// Since 1.0
   pub fn identity() -> Matrix {
@@ -71,7 +71,7 @@ impl Matrix {
 
   ///  Initializes matrix to a transformation that translates by tx and ty in the X and Y dimensions, respectively.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// tx : amount to translate in the X direction
   ///
@@ -88,7 +88,7 @@ impl Matrix {
 
   ///  Initializes matrix to a transformation that scales by sx and sy in the X and Y dimensions, respectively.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// sx : scale factor in the X direction
   ///
@@ -105,7 +105,7 @@ impl Matrix {
 
   ///  Initialized matrix to a transformation that rotates by radians.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// radians : angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
   ///
@@ -122,11 +122,11 @@ impl Matrix {
   ///
   /// It is allowable for result to be identical to either a or b.
   ///
-  /// result : a cairo_matrix_t in which to store the result
+  /// result : a matrix::Matrix in which to store the result
   ///
-  /// a : a cairo_matrix_t
+  /// a : a matrix::Matrix
   ///
-  /// b : a cairo_matrix_t
+  /// b : a matrix::Matrix
   ///
   /// Since 1.0
   pub fn multiply(a: &Matrix, b: &Matrix) -> Matrix {
@@ -139,7 +139,7 @@ impl Matrix {
 
   ///  Applies a translation by tx, ty to the transformation in matrix. The effect of the new transformation is to first translate the coordinates by tx and ty, then apply the original transformation to the coordinates.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// tx : amount to translate in the X direction
   ///
@@ -154,7 +154,7 @@ impl Matrix {
 
   ///  Applies scaling by sx, sy to the transformation in matrix. The effect of the new transformation is to first scale the coordinates by sx and sy, then apply the original transformation to the coordinates.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// sx : scale factor in the X direction
   ///
@@ -169,7 +169,7 @@ impl Matrix {
 
   ///  Applies rotation by radians to the transformation in matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// radians : angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
   ///
@@ -189,7 +189,7 @@ impl Matrix {
   ///
   /// Affine transformations are position invariant, so the same vector always transforms to the same vector. If (x1,y1) transforms to (x2,y2) then (x1+dx1,y1+dy1) will transform to (x1+dx2,y1+dy2) for all values of x1 and x2.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// dx : X component of a distance vector. An in/out parameter
   ///
@@ -207,7 +207,7 @@ impl Matrix {
 
   /// Transforms the point (x, y) by matrix.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// x : X position. An in/out parameter
   ///
@@ -225,7 +225,7 @@ impl Matrix {
 
   /// Changes matrix to be the inverse of its original value. Not all transformation matrices have inverses; if the matrix collapses points together (it is degenerate), then it has no inverse and this function will fail.
   ///
-  /// matrix : a cairo_matrix_t
+  /// matrix : a matrix::Matrix
   ///
   /// Returns : If matrix has an inverse, modifies matrix to be the inverse matrix and returns CAIRO_STATUS_SUCCESS. Otherwise, returns CAIRO_STATUS_INVALID_MATRIX.
   ///
