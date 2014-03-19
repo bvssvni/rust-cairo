@@ -1,8 +1,8 @@
 //! Describe type of surface content
 
-///  cairo_content_t is used to describe the content that a surface will contain, whether color information, alpha information (translucence vs. opacity), or both.
+/// surface::content::Content is used to describe the content that a surface will contain, whether color information, alpha information (translucence vs. opacity), or both.
 /// 
-/// Note: The large values here are designed to keep cairo_content_t values distinct from cairo_format_t values so that the implementation can detect the error if users confuse the two types.
+/// Note: The large values here are designed to keep surface::content::Content values distinct from surface::format::Format values so that the implementation can detect the error if users confuse the two types.
 /// 
 /// Since 1.0
 #[repr(i32)]
