@@ -1,6 +1,6 @@
 //! Describe composition order for drawing operations
 
-///  cairo_operator_t is used to set the compositing operator for all cairo drawing operations.
+/// operator::Operator is used to set the compositing operator for all cairo drawing operations.
 ///
 /// The default operator is CAIRO_OPERATOR_OVER.
 ///
