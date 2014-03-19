@@ -1,12 +1,12 @@
 //! Describe pattern type
 
-///  cairo_pattern_type_t is used to describe the type of a given pattern.
+/// pattern::pattern_type::PatternType is used to describe the type of a given pattern.
 /// 
 /// The type of a pattern is determined by the function used to create it. The cairo_pattern_create_rgb() and cairo_pattern_create_rgba() functions create SOLID patterns. The remaining cairo_pattern_create functions map to pattern types in obvious ways.
 /// 
 /// The pattern type can be queried with cairo_pattern_get_type()
 /// 
-/// Most cairo_pattern_t functions can be called with a pattern of any type, (though trying to change the extend or filter for a solid pattern will have no effect). A notable exception is cairo_pattern_add_color_stop_rgb() and cairo_pattern_add_color_stop_rgba() which must only be called with gradient patterns (either LINEAR or RADIAL). Otherwise the pattern will be shutdown and put into an error state.
+/// Most pattern::Pattern functions can be called with a pattern of any type, (though trying to change the extend or filter for a solid pattern will have no effect). A notable exception is cairo_pattern_add_color_stop_rgb() and cairo_pattern_add_color_stop_rgba() which must only be called with gradient patterns (either LINEAR or RADIAL). Otherwise the pattern will be shutdown and put into an error state.
 /// 
 /// New entries may be added in future versions.
 /// 
