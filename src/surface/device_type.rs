@@ -1,10 +1,10 @@
 //! Describe type of device
 
-///  cairo_device_type_t is used to describe the type of a given device. The devices types are also known as "backends" within cairo.
+/// surface::device_type::DeviceType is used to describe the type of a given device. The devices types are also known as "backends" within cairo.
 /// 
 /// The device type can be queried with cairo_device_get_type()
 /// 
-/// The various cairo_device_t functions can be used with devices of any type, but some backends also provide type-specific functions that must only be called with a device of the appropriate type. These functions have names that begin with cairo_type_device such as cairo_xcb_device_debug_cap_xrender_version().
+/// The various surface::Device functions can be used with devices of any type, but some backends also provide type-specific functions that must only be called with a device of the appropriate type. These functions have names that begin with cairo_type_device such as cairo_xcb_device_debug_cap_xrender_version().
 /// 
 /// The behavior of calling a type-specific function with a device of the wrong type is undefined.
 ///
