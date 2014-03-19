@@ -2,7 +2,7 @@
 
 use std;
 
-/// cairo_svg_version_t is used to describe the version number of the SVG specification that a generated SVG file will conform to.
+/// surface::SVGVersion is used to describe the version number of the SVG specification that a generated SVG file will conform to.
 ///
 /// Since 1.2
 #[repr(i32)]
@@ -13,7 +13,7 @@ pub enum SVGVersion {
   SVGVersion_1_2 = 1
 }
 
-///  cairo_surface_t is the abstract type representing all different drawing targets that cairo can render to. The actual drawings are performed using a cairo context.
+/// surface::Surface is the abstract type representing all different drawing targets that cairo can render to. The actual drawings are performed using a cairo context.
 /// 
 /// A cairo surface is created by using backend-specific constructors, typically of the form cairo_backend_surface_create().
 ///
@@ -23,7 +23,7 @@ pub enum SVGVersion {
 ///
 /// ```
 /// void
-/// modify_image_surface (cairo_surface_t *surface)
+/// modify_image_surface (surface::Surface *surface)
 /// {
 ///   unsigned char *data;
 ///   int width, height, stride;
@@ -49,11 +49,11 @@ pub struct Surface {
   opaque: *mut std::libc::c_void
 }
 
-///  A cairo_device_t represents the driver interface for drawing operations to a cairo_surface_t. There are different subtypes of cairo_device_t for different drawing backends; for example, cairo_egl_device_create() creates a device that wraps an EGL display and context.
+///  A surface::Device represents the driver interface for drawing operations to a surface::Surface. There are different subtypes of surface::Device for different drawing backends; for example, cairo_egl_device_create() creates a device that wraps an EGL display and context.
 /// 
 /// The type of a device can be queried with cairo_device_get_type().
 /// 
-/// Memory management of cairo_device_t is done with cairo_device_reference() and cairo_device_destroy().
+/// Memory management of surface::Device is done with cairo_device_reference() and cairo_device_destroy().
 /// 
 /// Since 1.10
 pub struct Device {
@@ -64,7 +64,7 @@ pub struct Device {
 impl Device {
   ///  Checks whether an error has previously occurred for this device.
   ///
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   ///
   /// Returns : CAIRO_STATUS_SUCCESS on success or an error code if the device is in an error state.
   /// 
@@ -82,7 +82,7 @@ impl Device {
   ///
   /// This function may acquire devices.
   ///
-  /// device : the cairo_device_t to finish
+  /// device : the surface::Device to finish
   ///
   /// Since 1.10
   pub fn finish(&mut self) {
@@ -95,7 +95,7 @@ impl Device {
   /// 
   /// This function may acquire devices.
   /// 
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   ///
   /// Since 1.10
   pub fn flush(&mut self) {
@@ -104,9 +104,9 @@ impl Device {
     }
   }
 
-  ///  This function returns the type of the device. See cairo_device_type_t for available types.
+  ///  This function returns the type of the device. See  surface::device_type::DeviceType for available types.
   /// 
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   ///
   /// Returns : The type of device.
   ///
@@ -120,7 +120,7 @@ impl Device {
 
   ///  Returns the current reference count of device.
   ///
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   ///
   /// Returns : the current reference count of device. If the object is a nil object, 0 will be returned.
   ///
@@ -142,7 +142,7 @@ impl Device {
   /// 
   /// As various Cairo functions can acquire devices when called, these functions may also cause deadlocks when you call them with an acquired device. So you must not have a device acquired when calling them. These functions are marked in the documentation.
   /// 
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   /// 
   /// Returns : CAIRO_STATUS_SUCCESS on success or an error code if the device is in an error state and could not be acquired. After a successful call to cairo_device_acquire(), a matching call to cairo_device_release() is required.
   /// 
@@ -156,7 +156,7 @@ impl Device {
 
   ///  Releases a device previously acquired using cairo_device_acquire(). See that function for details.
   /// 
-  /// device : a cairo_device_t
+  /// device : a surface::Device
   /// 
   /// Since 1.10
   pub fn release(&mut self) {
@@ -256,7 +256,7 @@ impl Surface {
 
   ///  Checks whether an error has previously occurred for this surface.
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Returns : CAIRO_STATUS_SUCCESS, CAIRO_STATUS_NULL_POINTER, CAIRO_STATUS_NO_MEMORY, CAIRO_STATUS_READ_ERROR, CAIRO_STATUS_INVALID_CONTENT, CAIRO_STATUS_INVALID_FORMAT, or CAIRO_STATUS_INVALID_VISUAL.
   ///
@@ -272,7 +272,7 @@ impl Surface {
   ///
   /// When the last call to cairo_surface_destroy() decreases the reference count to zero, cairo will call cairo_surface_finish() if it hasn't been called already, before freeing the resources associated with the surface.
   ///
-  /// surface : the cairo_surface_t to finish
+  /// surface : the surface::Surface to finish
   ///
   /// Since 1.0
   pub fn finish(&mut self) {
@@ -283,7 +283,7 @@ impl Surface {
 
   ///  Do any pending drawing for the surface and also restore any temporary modifications cairo has made to the surface's state. This function must be called before switching from drawing on the surface with cairo to drawing on it directly with native APIs. If the surface doesn't support direct access, then this function does nothing.
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Since 1.0
   pub fn flush(&mut self) {
@@ -292,9 +292,9 @@ impl Surface {
     }
   }
 
-  ///  This function returns the device for a surface. See cairo_device_t.
+  ///  This function returns the device for a surface. See surface::Device.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Returns : The device for surface or NULL if the surface does not have an associated device.
   ///
@@ -308,9 +308,9 @@ impl Surface {
 
   ///  Retrieves the default font rendering options for the surface. This allows display surfaces to report the correct subpixel order for rendering on them, print surfaces to disable hinting of metrics and so forth. The result can then be used with cairo_scaled_font_create().
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
-  /// options : a cairo_font_options_t object into which to store the retrieved options. All existing values are overwritten
+  /// options : a font::Options object into which to store the retrieved options. All existing values are overwritten
   ///
   /// Since 1.0
   pub fn get_font_options(&mut self, options: &mut super::font::Options) {
@@ -319,9 +319,9 @@ impl Surface {
     }
   }
 
-  ///  This function returns the content type of surface which indicates whether the surface contains color and/or alpha information. See cairo_content_t.
+  ///  This function returns the content type of surface which indicates whether the surface contains color and/or alpha information. See surface::content::Content.
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Returns : The content type of surface.
   ///
@@ -335,7 +335,7 @@ impl Surface {
 
   ///  Tells cairo that drawing has been done to surface using means other than cairo, and that cairo should reread any cached areas. Note that you must call cairo_surface_flush() before doing such drawing.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Since 1.0
   pub fn mark_dirty(&mut self) {
@@ -348,7 +348,7 @@ impl Surface {
   ///
   /// Any cached clip set on the surface will be reset by this function, to make sure that future cairo calls have the clip set that they expect.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// x : X coordinate of dirty rectangle
   ///
@@ -365,11 +365,11 @@ impl Surface {
     }
   }
 
-  ///  Sets an offset that is added to the device coordinates determined by the CTM when drawing to surface. One use case for this function is when we want to create a cairo_surface_t that redirects drawing for a portion of an onscreen surface to an offscreen surface in a way that is completely invisible to the user of the cairo API. Setting a transformation via cairo_translate() isn't sufficient to do this, since functions like cairo_device_to_user() will expose the hidden offset.
+  ///  Sets an offset that is added to the device coordinates determined by the CTM when drawing to surface. One use case for this function is when we want to create a surface::Surface that redirects drawing for a portion of an onscreen surface to an offscreen surface in a way that is completely invisible to the user of the cairo API. Setting a transformation via cairo_translate() isn't sufficient to do this, since functions like cairo_device_to_user() will expose the hidden offset.
   ///
   /// Note that the offset affects drawing to the surface as well as using the surface in a source pattern.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// x_offset : the offset in the X direction, in device units
   /// 
@@ -384,7 +384,7 @@ impl Surface {
 
   ///  This function returns the previous device offset set by cairo_surface_set_device_offset().
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// x_offset : the offset in the X direction, in device units
   ///
@@ -412,7 +412,7 @@ impl Surface {
   ///
   /// The default fallback resoultion is 300 pixels per inch in both dimensions.
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// x_pixels_per_inch : horizontal setting for pixels per inch
   ///
@@ -427,7 +427,7 @@ impl Surface {
 
   ///  This function returns the previous fallback resolution set by cairo_surface_set_fallback_resolution(), or default fallback resolution if never set.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// x_pixels_per_inch : horizontal pixels per inch
   /// 
@@ -443,9 +443,9 @@ impl Surface {
     }
   }
 
-  ///  This function returns the type of the backend used to create a surface. See cairo_surface_type_t for available types.
+  ///  This function returns the type of the backend used to create a surface. See surface::surface_type::SurfaceType for available types.
   /// 
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Returns : The type of surface.
   ///
@@ -459,7 +459,7 @@ impl Surface {
 
   ///  Returns the current reference count of surface.
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Returns : the current reference count of surface. If the object is a nil object, 0 will be returned.
   ///
@@ -473,9 +473,9 @@ impl Surface {
 
   ///  Emits the current page for backends that support multiple pages, but doesn't clear it, so that the contents of the current page will be retained for the next page. Use cairo_surface_show_page() if you want to get an empty page after the emission.
   ///
-  /// There is a convenience function for this that takes a cairo_t, namely cairo_copy_page().
+  /// There is a convenience function for this that takes a Cairo, namely cairo_copy_page().
   ///
-  /// surface : a cairo_surface_t
+  /// surface : a surface::Surface
   ///
   /// Since 1.6
   pub fn copy_page(&mut self) {
@@ -486,9 +486,9 @@ impl Surface {
 
   ///  Emits and clears the current page for backends that support multiple pages. Use cairo_surface_copy_page() if you don't want to clear the page.
   ///
-  /// There is a convenience function for this that takes a cairo_t, namely cairo_show_page().
+  /// There is a convenience function for this that takes a Cairo, namely cairo_show_page().
   ///
-  /// surface : a cairo_Surface_t
+  /// surface : a surface::Surface
   ///
   /// Since 1.6
   pub fn show_page(&mut self) {
@@ -575,7 +575,7 @@ impl Surface {
   ///
   /// filename : name of PNG file to load
   ///
-  /// Returns : a new cairo_surface_t initialized with the contents of the PNG file, or a "nil" surface if any error occurred. A nil surface can be checked for with cairo_surface_status(surface) which may return one of the following values: CAIRO_STATUS_NO_MEMORY CAIRO_STATUS_FILE_NOT_FOUND CAIRO_STATUS_READ_ERROR Alternatively, you can allow errors to propagate through the drawing operations and check the status on the context upon completion using cairo_status().
+  /// Returns : a new surface::Surface initialized with the contents of the PNG file, or a "nil" surface if any error occurred. A nil surface can be checked for with cairo_surface_status(surface) which may return one of the following values: CAIRO_STATUS_NO_MEMORY CAIRO_STATUS_FILE_NOT_FOUND CAIRO_STATUS_READ_ERROR Alternatively, you can allow errors to propagate through the drawing operations and check the status on the context upon completion using cairo_status().
   ///
   /// Since 1.0
   pub fn png(filename: &str) -> Surface {
@@ -588,7 +588,7 @@ impl Surface {
 
   ///  Writes the contents of surface to a new file filename as a PNG image.
   ///
-  /// surface : a cairo_surface_t with pixel contents
+  /// surface : a surface::Surface with pixel contents
   ///
   /// filename : the name of a file to write to
   ///
@@ -632,7 +632,7 @@ impl Surface {
   ///
   /// This function should only be called before any drawing operations have been performed on the given surface. The simplest way to do this is to call this function immediately after creating the surface.
   /// 
-  /// surface : a SVG cairo_surface_t
+  /// surface : a SVG surface::Surface
   ///
   /// version : SVG version
   ///
