@@ -1,6 +1,6 @@
 //! Describe type of antialiasing when rendering text or shapes
 
-///  Specifies the type of antialiasing to do when rendering text or shapes.
+/// Specifies the type of antialiasing to do when rendering text or shapes.
 ///
 /// As it is not necessarily clear from the above what advantages a particular antialias method provides, since 1.12, there is also a set of hints: CAIRO_ANTIALIAS_FAST: Allow the backend to degrade raster quality for speed CAIRO_ANTIALIAS_GOOD: A balance between speed and quality CAIRO_ANTIALIAS_BEST: A high-fidelity, but potentially slow, raster mode
 ///

@@ -2,7 +2,7 @@
 
 use std;
 
-///  A matrix::Matrix holds an affine transformation, such as a scale, rotation, shear, or a combination of those. The transformation of a point (x, y) is given by:
+/// A matrix::Matrix holds an affine transformation, such as a scale, rotation, shear, or a combination of those. The transformation of a point (x, y) is given by:
 ///
 /// ```
 /// x_new = xx * x + xy * y + x0;
@@ -26,7 +26,7 @@ pub struct Matrix {
 }
 
 impl Matrix {
-  ///  Sets matrix to be the affine transformation given by xx, yx, xy, yy, x0, y0. The transformation is given by:
+  /// Sets matrix to be the affine transformation given by xx, yx, xy, yy, x0, y0. The transformation is given by:
   ///
   /// ```
   /// x_new = xx * x + xy * y + x0;
@@ -56,7 +56,7 @@ impl Matrix {
     }
   }
 
-  ///  Modifies matrix to be an identity transformation.
+  /// Modifies matrix to be an identity transformation.
   /// 
   /// matrix : a matrix::Matrix
   ///
@@ -69,7 +69,7 @@ impl Matrix {
     }
   }
 
-  ///  Initializes matrix to a transformation that translates by tx and ty in the X and Y dimensions, respectively.
+  /// Initializes matrix to a transformation that translates by tx and ty in the X and Y dimensions, respectively.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -86,7 +86,7 @@ impl Matrix {
     }
   }
 
-  ///  Initializes matrix to a transformation that scales by sx and sy in the X and Y dimensions, respectively.
+  /// Initializes matrix to a transformation that scales by sx and sy in the X and Y dimensions, respectively.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -103,7 +103,7 @@ impl Matrix {
     }
   }
 
-  ///  Initialized matrix to a transformation that rotates by radians.
+  /// Initialized matrix to a transformation that rotates by radians.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -118,7 +118,7 @@ impl Matrix {
     }
   }
 
-  ///  Multiplies the affine transformations in a and b together and stores the result in result. The effect of the resulting transformation is to first apply the transformation in a to the coordinates and then apply the transformation in b to the coordinates.
+  /// Multiplies the affine transformations in a and b together and stores the result in result. The effect of the resulting transformation is to first apply the transformation in a to the coordinates and then apply the transformation in b to the coordinates.
   ///
   /// It is allowable for result to be identical to either a or b.
   ///
@@ -137,7 +137,7 @@ impl Matrix {
     }
   }
 
-  ///  Applies a translation by tx, ty to the transformation in matrix. The effect of the new transformation is to first translate the coordinates by tx and ty, then apply the original transformation to the coordinates.
+  /// Applies a translation by tx, ty to the transformation in matrix. The effect of the new transformation is to first translate the coordinates by tx and ty, then apply the original transformation to the coordinates.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -152,7 +152,7 @@ impl Matrix {
     }
   }
 
-  ///  Applies scaling by sx, sy to the transformation in matrix. The effect of the new transformation is to first scale the coordinates by sx and sy, then apply the original transformation to the coordinates.
+  /// Applies scaling by sx, sy to the transformation in matrix. The effect of the new transformation is to first scale the coordinates by sx and sy, then apply the original transformation to the coordinates.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -167,7 +167,7 @@ impl Matrix {
     }
   }
 
-  ///  Applies rotation by radians to the transformation in matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.
+  /// Applies rotation by radians to the transformation in matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.
   ///
   /// matrix : a matrix::Matrix
   ///
@@ -180,7 +180,7 @@ impl Matrix {
     }
   }
 
-  ///  Transforms the distance vector (dx,dy) by matrix. This is similar to cairo_matrix_transform_point() except that the translation components of the transformation are ignored. The calculation of the returned vector is as follows:
+  /// Transforms the distance vector (dx,dy) by matrix. This is similar to cairo_matrix_transform_point() except that the translation components of the transformation are ignored. The calculation of the returned vector is as follows:
   ///
   /// ```
   /// dx2 = dx1 * a + dy1 * c;

@@ -1,6 +1,6 @@
 //! Describe font slant
 
-///  Specifies variants of a font face based on their slant.
+/// Specifies variants of a font face based on their slant.
 /// 
 /// Since 1.0
 #[repr(i32)]

@@ -2,7 +2,7 @@
 
 use std;
 
-///  A pattern::Pattern represents a source when drawing onto a surface. There are different subtypes of pattern::Pattern, for different types of sources; for example, cairo_pattern_create_rgb() creates a pattern for a solid opaque color.
+/// A pattern::Pattern represents a source when drawing onto a surface. There are different subtypes of pattern::Pattern, for different types of sources; for example, cairo_pattern_create_rgb() creates a pattern for a solid opaque color.
 ///
 /// Other than various cairo_pattern_create_type() functions, some of the pattern types can be implicitly created using various cairo_set_source_type() functions; for example cairo_set_source_rgb().
 /// 
@@ -17,7 +17,7 @@ pub struct Pattern {
 }
 
 impl Pattern {
-  ///  Adds an opaque color stop to a gradient pattern. The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.
+  /// Adds an opaque color stop to a gradient pattern. The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.
   /// 
   /// The color is specified in the same way as in cairo_set_source_rgb().
   /// 
@@ -42,7 +42,7 @@ impl Pattern {
     }
   }
 
-  ///  Adds a translucent color stop to a gradient pattern. The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.
+  /// Adds a translucent color stop to a gradient pattern. The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.
   ///
   /// The color is specified in the same way as in cairo_set_source_rgba().
   ///
@@ -69,7 +69,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the number of color stops specified in the given gradient pattern.
+  /// Gets the number of color stops specified in the given gradient pattern.
   ///
   /// pattern : a pattern::Pattern
   ///
@@ -86,7 +86,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the color and offset information at the given index for a gradient pattern. Values of index are 0 to 1 less than the number returned by cairo_pattern_get_color_stop_count().
+  /// Gets the color and offset information at the given index for a gradient pattern. Values of index are 0 to 1 less than the number returned by cairo_pattern_get_color_stop_count().
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -117,7 +117,7 @@ impl Pattern {
     }
   }
 
-  ///  Creates a new pattern::Pattern corresponding to an opaque color. The color components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
+  /// Creates a new pattern::Pattern corresponding to an opaque color. The color components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
   /// 
   /// red : red component of the color
   /// 
@@ -136,7 +136,7 @@ impl Pattern {
     }
   }
 
-  ///  Creates a new pattern::Pattern corresponding to a translucent color. The color components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
+  /// Creates a new pattern::Pattern corresponding to a translucent color. The color components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
   /// 
   /// red : red component of the color
   /// 
@@ -156,7 +156,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the solid color for a solid color pattern.
+  /// Gets the solid color for a solid color pattern.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -182,7 +182,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the solid color for a solid color pattern.
+  /// Gets the solid color for a solid color pattern.
   ///
   /// pattern : a pattern::Pattern
   ///
@@ -204,7 +204,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the surface of a surface pattern. The reference returned in surface is owned by the pattern; the caller should call cairo_surface_reference() if the surface is to be retained.
+  /// Gets the surface of a surface pattern. The reference returned in surface is owned by the pattern; the caller should call cairo_surface_reference() if the surface is to be retained.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -221,7 +221,7 @@ impl Pattern {
     }
   }
 
-  ///  Create a new linear gradient pattern::Pattern along the line defined by (x0, y0) and (x1, y1). Before using the gradient pattern, a number of color stops should be defined using cairo_pattern_add_color_stop_rgb() or cairo_pattern_add_color_stop_rgba().
+  /// Create a new linear gradient pattern::Pattern along the line defined by (x0, y0) and (x1, y1). Before using the gradient pattern, a number of color stops should be defined using cairo_pattern_add_color_stop_rgb() or cairo_pattern_add_color_stop_rgba().
   /// 
   /// Note: The coordinates here are in pattern space. For a new pattern, pattern space is identical to user space, but the relationship between the spaces can be changed with cairo_pattern_set_matrix().
   /// 
@@ -243,7 +243,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the gradient endpoints for a linear gradient.
+  /// Gets the gradient endpoints for a linear gradient.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -269,7 +269,7 @@ impl Pattern {
     }
   }
 
-  ///  Creates a new radial gradient pattern::Pattern between the two circles defined by (cx0, cy0, radius0) and (cx1, cy1, radius1). Before using the gradient pattern, a number of color stops should be defined using cairo_pattern_add_color_stop_rgb() or cairo_pattern_add_color_stop_rgba().
+  /// Creates a new radial gradient pattern::Pattern between the two circles defined by (cx0, cy0, radius0) and (cx1, cy1, radius1). Before using the gradient pattern, a number of color stops should be defined using cairo_pattern_add_color_stop_rgb() or cairo_pattern_add_color_stop_rgba().
   /// 
   /// Note: The coordinates here are in pattern space. For a new pattern, pattern space is identical to user space, but the relationship between the spaces can be changed with cairo_pattern_set_matrix().
   /// 
@@ -295,7 +295,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the gradient endpoint circles for a radial gradient, each specified as a center coordinate and a radius.
+  /// Gets the gradient endpoint circles for a radial gradient, each specified as a center coordinate and a radius.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -327,7 +327,7 @@ impl Pattern {
     }
   }
 
-  ///  Create a new mesh pattern.
+  /// Create a new mesh pattern.
   /// 
   /// Mesh patterns are tensor-product patch meshes (type 7 shadings in PDF). Mesh patterns may also be used to create other types of shadings that are special cases of tensor-product patch meshes such as Coons patch meshes (type 6 shading in PDF) and Gouraud-shaded triangle meshes (type 4 and 5 shadings in PDF).
   /// 
@@ -413,7 +413,7 @@ impl Pattern {
     }
   }
 
-  ///  Begin a patch in a mesh pattern.
+  /// Begin a patch in a mesh pattern.
   /// 
   /// After calling this function, the patch shape should be defined with cairo_mesh_pattern_move_to(), cairo_mesh_pattern_line_to() and cairo_mesh_pattern_curve_to().
   /// 
@@ -430,7 +430,7 @@ impl Pattern {
     }
   }
 
-  ///  Indicates the end of the current patch in a mesh pattern.
+  /// Indicates the end of the current patch in a mesh pattern.
   /// 
   /// If the current patch has less than 4 sides, it is closed with a straight line from the current point to the first point of the patch as if cairo_mesh_pattern_line_to() was used.
   /// 
@@ -445,7 +445,7 @@ impl Pattern {
     }
   }
 
-  ///  Define the first point of the current patch in a mesh pattern.
+  /// Define the first point of the current patch in a mesh pattern.
   /// 
   /// After this call the current point will be (x, y).
   /// 
@@ -464,7 +464,7 @@ impl Pattern {
     }
   }
 
-  ///  Adds a line to the current patch from the current point to position (x, y) in pattern-space coordinates.
+  /// Adds a line to the current patch from the current point to position (x, y) in pattern-space coordinates.
   /// 
   /// If there is no current point before the call to cairo_mesh_pattern_line_to() this function will behave as cairo_mesh_pattern_move_to(pattern, x, y).
   /// 
@@ -485,7 +485,7 @@ impl Pattern {
     }
   }
 
-  ///  Adds a cubic Bézier spline to the current patch from the current point to position (x3, y3) in pattern-space coordinates, using (x1, y1) and (x2, y2) as the control points.
+  /// Adds a cubic Bézier spline to the current patch from the current point to position (x3, y3) in pattern-space coordinates, using (x1, y1) and (x2, y2) as the control points.
   /// 
   /// If the current patch has no current point before the call to cairo_mesh_pattern_curve_to(), this function will behave as if preceded by a call to cairo_mesh_pattern_move_to(pattern, x1, y1).
   /// 
@@ -514,7 +514,7 @@ impl Pattern {
     }
   }
 
-  ///  Set an internal control point of the current patch.
+  /// Set an internal control point of the current patch.
   /// 
   /// Valid values for point_num are from 0 to 3 and identify the control points as explained in cairo_pattern_create_mesh().
   /// 
@@ -535,7 +535,7 @@ impl Pattern {
     }
   }
 
-  ///  Sets the color of a corner of the current patch in a mesh pattern.
+  /// Sets the color of a corner of the current patch in a mesh pattern.
   /// 
   /// The color is specified in the same way as in cairo_set_source_rgb().
   /// 
@@ -560,7 +560,7 @@ impl Pattern {
     }
   }
 
-  ///  Sets the color of a corner of the current patch in a mesh pattern.
+  /// Sets the color of a corner of the current patch in a mesh pattern.
   /// 
   /// The color is specified in the same way as in cairo_set_source_rgba().
   /// 
@@ -588,7 +588,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the number of patches specified in the given mesh pattern.
+  /// Gets the number of patches specified in the given mesh pattern.
   /// 
   /// The number only includes patches which have been finished by calling cairo_mesh_pattern_end_patch(). For example it will be 0 during the definition of the first patch.
   /// 
@@ -607,7 +607,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets path defining the patch patch_num for a mesh pattern.
+  /// Gets path defining the patch patch_num for a mesh pattern.
   /// 
   /// patch_num can range 0 to 1 less than the number returned by cairo_mesh_pattern_get_patch_count().
   /// 
@@ -625,7 +625,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the control point point_num of patch patch_num for a mesh pattern.
+  /// Gets the control point point_num of patch patch_num for a mesh pattern.
   /// 
   /// patch_num can range 0 to 1 less than the number returned by cairo_mesh_pattern_get_patch_count().
   /// 
@@ -653,7 +653,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the color information in corner corner_num of patch patch_num for a mesh pattern.
+  /// Gets the color information in corner corner_num of patch patch_num for a mesh pattern.
   /// 
   /// patch_num can range 0 to 1 less than the number returned by cairo_mesh_pattern_get_patch_count().
   /// 
@@ -687,7 +687,7 @@ impl Pattern {
     }
   }
 
-  ///  Checks whether an error has previously occurred for this pattern.
+  /// Checks whether an error has previously occurred for this pattern.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -701,7 +701,7 @@ impl Pattern {
     }
   }
 
-  ///  Sets the mode to be used for drawing outside the area of a pattern. See pattern::extend::Extend for details on the semantics of each extend strategy.
+  /// Sets the mode to be used for drawing outside the area of a pattern. See pattern::extend::Extend for details on the semantics of each extend strategy.
   /// 
   /// The default extend mode is CAIRO_EXTEND_NONE for surface patterns and CAIRO_EXTEND_PAD for gradient patterns.
   /// 
@@ -717,7 +717,7 @@ impl Pattern {
   }
 
 
-  ///  Gets the current extend mode for a pattern. See pattern::extend::Extend for details on the semantics of each extend strategy.
+  /// Gets the current extend mode for a pattern. See pattern::extend::Extend for details on the semantics of each extend strategy.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -751,7 +751,7 @@ impl Pattern {
     }
   }
 
-  ///  Gets the current filter for a pattern. See pattern::filter::Filter for details on each filter.
+  /// Gets the current filter for a pattern. See pattern::filter::Filter for details on each filter.
   /// 
   /// pattern : a pattern::Pattern
   /// 
@@ -765,7 +765,7 @@ impl Pattern {
     }
   }
 
-  ///  Sets the pattern's transformation matrix to matrix. This matrix is a transformation from user space to pattern space.
+  /// Sets the pattern's transformation matrix to matrix. This matrix is a transformation from user space to pattern space.
   /// 
   /// When a pattern is first created it always has the identity matrix for its transformation matrix, which means that pattern space is initially identical to user space.
   /// 
@@ -793,7 +793,7 @@ impl Pattern {
     }
   }
 
-  ///  Stores the pattern's transformation matrix into matrix.
+  /// Stores the pattern's transformation matrix into matrix.
   /// 
   /// pattern : a pattern::Pattern
   /// 

@@ -3,7 +3,7 @@
 use std;
 use super::DeepClone;
 
-///  An opaque structure holding all options that are used when rendering fonts.
+/// An opaque structure holding all options that are used when rendering fonts.
 /// 
 /// Individual features of a font::Options can be set or accessed using functions named cairo_font_options_set_feature_name() and cairo_font_options_get_feature_name(), like cairo_font_options_set_antialias() and cairo_font_options_get_antialias().
 /// 
@@ -27,7 +27,7 @@ pub struct FontFace {
   opaque: *mut std::libc::c_void
 }
 
-///  A font::ScaledFont is a font scaled to a particular size and device resolution. A font::ScaledFont is most useful for low-level font usage where a library or application wants to cache a reference to a scaled font to speed up the computation of metrics.
+/// A font::ScaledFont is a font scaled to a particular size and device resolution. A font::ScaledFont is most useful for low-level font usage where a library or application wants to cache a reference to a scaled font to speed up the computation of metrics.
 /// 
 /// There are various types of scaled fonts, depending on the font backend they use. The type of a scaled font can be queried using cairo_scaled_font_get_type().
 /// 
@@ -53,7 +53,7 @@ pub struct Glyph {
   y: f64
 }
 
-///  The font::Cluster structure holds information about a single text cluster. A text cluster is a minimal mapping of some glyphs corresponding to some UTF-8 text.
+/// The font::Cluster structure holds information about a single text cluster. A text cluster is a minimal mapping of some glyphs corresponding to some UTF-8 text.
 /// 
 /// For a cluster to be valid, both num_bytes and num_glyphs should be non-negative, and at least one should be non-zero. Note that clusters with zero glyphs are not as well supported as normal clusters. For example, PDF rendering applications typically ignore those clusters when PDF text is being selected.
 /// 
@@ -104,7 +104,7 @@ pub struct TextExtents {
 }
 
 impl Options {
-  ///  Allocates a new font options object with all options initialized to default values.
+  /// Allocates a new font options object with all options initialized to default values.
   /// 
   /// Returns : a newly allocated font::Options. Free with cairo_font_options_destroy(). This function always returns a valid pointer; if memory cannot be allocated, then a special error object is returned where all operations on the object do nothing. You can check for this with cairo_font_options_status().
   ///
@@ -116,7 +116,7 @@ impl Options {
     }
   }
 
-  ///  Checks whether an error has previously occurred for this font options object
+  /// Checks whether an error has previously occurred for this font options object
   /// 
   /// options : a font::Options
   ///
@@ -130,7 +130,7 @@ impl Options {
     }
   }
 
-  ///  Merges non-default options from other into options, replacing existing values. This operation can be thought of as somewhat similar to compositing other onto options with the operation of CAIRO_OPERATOR_OVER.
+  /// Merges non-default options from other into options, replacing existing values. This operation can be thought of as somewhat similar to compositing other onto options with the operation of CAIRO_OPERATOR_OVER.
   /// 
   /// options : a font::Options
   ///
@@ -143,7 +143,7 @@ impl Options {
     }
   }
 
-  ///  Compute a hash for the font options object; this value will be useful when storing an object containing a font::Options in a hash table.
+  /// Compute a hash for the font options object; this value will be useful when storing an object containing a font::Options in a hash table.
   /// 
   /// options : a font::Options
   ///
@@ -157,7 +157,7 @@ impl Options {
     }
   }
 
-  ///  Compares two font options objects for equality.
+  /// Compares two font options objects for equality.
   /// 
   /// options : a font::Options
   ///
@@ -173,7 +173,7 @@ impl Options {
     }
   }
 
-  ///  Sets the antialiasing mode for the font options object. This specifies the type of antialiasing to do when rendering text.
+  /// Sets the antialiasing mode for the font options object. This specifies the type of antialiasing to do when rendering text.
   /// 
   /// options : a font::Options
   ///
@@ -186,7 +186,7 @@ impl Options {
     }
   }
 
-  ///  Gets the antialiasing mode for the font options object.
+  /// Gets the antialiasing mode for the font options object.
   ///
   /// options : a font::Options
   ///
@@ -200,7 +200,7 @@ impl Options {
     }
   }
 
-  ///  Sets the subpixel order for the font options object. The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of CAIRO_ANTIALIAS_SUBPIXEL. See the documentation for font::subpixel_order::SubpixelOrder for full details.
+  /// Sets the subpixel order for the font options object. The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of CAIRO_ANTIALIAS_SUBPIXEL. See the documentation for font::subpixel_order::SubpixelOrder for full details.
   /// 
   /// options : a font::Options
   /// 
@@ -213,7 +213,7 @@ impl Options {
     }
   }
 
-  ///  Gets the subpixel order for the font options object. See the documentation for font::subpixel_order::SubpixelOrder for full details.
+  /// Gets the subpixel order for the font options object. See the documentation for font::subpixel_order::SubpixelOrder for full details.
   /// 
   /// options : a font::Options
   ///
@@ -227,7 +227,7 @@ impl Options {
     }
   }
 
-  ///  Sets the hint style for font outlines for the font options object. This controls whether to fit font outlines to the pixel grid, and if so, whether to optimize for fidelity or contrast. See the documentation for font::hint_style::HintStyle for full details.
+  /// Sets the hint style for font outlines for the font options object. This controls whether to fit font outlines to the pixel grid, and if so, whether to optimize for fidelity or contrast. See the documentation for font::hint_style::HintStyle for full details.
   ///
   /// options : a font::Options
   ///
@@ -240,7 +240,7 @@ impl Options {
     }
   }
 
-  ///  Gets the hint style for font outlines for the font options object. See the documentation for font::hint_style::HintStyle for full details.
+  /// Gets the hint style for font outlines for the font options object. See the documentation for font::hint_style::HintStyle for full details.
   /// 
   /// options : a font::Options
   ///
@@ -254,7 +254,7 @@ impl Options {
     }
   }
 
-  ///  Sets the metrics hinting mode for the font options object. This controls whether metrics are quantized to integer values in device units. See the documentation for font::hint_metrics::HintMetrics for full details.
+  /// Sets the metrics hinting mode for the font options object. This controls whether metrics are quantized to integer values in device units. See the documentation for font::hint_metrics::HintMetrics for full details.
   /// 
   /// options : a font::Options
   ///
@@ -267,7 +267,7 @@ impl Options {
     }
   }
 
-  ///  Gets the metrics hinting mode for the font options object. See the documentation for font::hint_metrics::HintMetrics for full details.
+  /// Gets the metrics hinting mode for the font options object. See the documentation for font::hint_metrics::HintMetrics for full details.
   /// 
   /// options : a font::Options
   /// 
@@ -333,7 +333,7 @@ extern {
 }
 
 impl FontFace {
-  ///  Creates a font face from a triplet of family, slant, and weight. These font faces are used in implementation of the the Cairo "toy" font API.
+  /// Creates a font face from a triplet of family, slant, and weight. These font faces are used in implementation of the the Cairo "toy" font API.
   /// 
   /// If family is the zero-length string "", the platform-specific default family is assumed. The default family then can be queried using cairo_toy_font_face_get_family().
   /// 
@@ -356,7 +356,7 @@ impl FontFace {
     }
   }
 
-  ///  Gets the familly name of a toy font.
+  /// Gets the familly name of a toy font.
   /// 
   /// font_face : A toy font face
   /// 
@@ -370,7 +370,7 @@ impl FontFace {
     }
   }
 
-  ///  Gets the slant a toy font.
+  /// Gets the slant a toy font.
   /// 
   /// font_face : A toy font face
   ///
@@ -384,7 +384,7 @@ impl FontFace {
     }
   }
 
-  ///  Gets the weight a toy font.
+  /// Gets the weight a toy font.
   /// 
   /// font_face : A toy font face
   ///
@@ -398,7 +398,7 @@ impl FontFace {
     }
   }
 
-  ///  Checks whether an error has previously occurred for this font face
+  /// Checks whether an error has previously occurred for this font face
   /// 
   /// font_face : a font::FontFace
   /// 
@@ -412,7 +412,7 @@ impl FontFace {
     }
   }
 
-  ///  This function returns the type of the backend used to create a font face. See font::font_type::FontType for available types.
+  /// This function returns the type of the backend used to create a font face. See font::font_type::FontType for available types.
   /// 
   /// font_face : a font face
   /// 
@@ -426,7 +426,7 @@ impl FontFace {
     }
   }
 
-  ///  Returns the current reference count of font_face.
+  /// Returns the current reference count of font_face.
   /// 
   /// font_face : a font::FontFace
   ///
@@ -477,7 +477,7 @@ extern {
 }
 
 impl ScaledFont {
-  ///  Creates a font::ScaledFont object from a font face and matrices that describe the size of the font and the environment in which it will be used.
+  /// Creates a font::ScaledFont object from a font face and matrices that describe the size of the font and the environment in which it will be used.
   /// 
   /// font_face : a font::FontFace
   ///
@@ -497,7 +497,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Checks whether an error has previously occurred for this scaled_font.
+  /// Checks whether an error has previously occurred for this scaled_font.
   /// 
   /// scaled_font : a font::ScaledFont
   ///
@@ -511,7 +511,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Gets the metrics for a font::ScaledFont.
+  /// Gets the metrics for a font::ScaledFont.
   /// 
   /// scaled_font : a font::ScaledFont
   /// 
@@ -526,7 +526,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Gets the extents for a string of text. The extents describe a user-space rectangle that encloses the "inked" portion of the text drawn at the origin (0,0) (as it would be drawn by cairo_show_text() if the cairo graphics state were set to the same font_face, font_matrix, ctm, and font_options as scaled_font). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_text().
+  /// Gets the extents for a string of text. The extents describe a user-space rectangle that encloses the "inked" portion of the text drawn at the origin (0,0) (as it would be drawn by cairo_show_text() if the cairo graphics state were set to the same font_face, font_matrix, ctm, and font_options as scaled_font). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_text().
   /// 
   /// Note that whitespace characters do not directly contribute to the size of the rectangle (extents.width and extents.height). They do contribute indirectly by changing the position of non-whitespace characters. In particular, trailing whitespace characters are likely to not affect the size of the rectangle, though they will affect the x_advance and y_advance values.
   /// 
@@ -545,7 +545,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Gets the extents for an array of glyphs. The extents describe a user-space rectangle that encloses the "inked" portion of the glyphs, (as they would be drawn by cairo_show_glyphs() if the cairo graphics state were set to the same font_face, font_matrix, ctm, and font_options as scaled_font). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_glyphs().
+  /// Gets the extents for an array of glyphs. The extents describe a user-space rectangle that encloses the "inked" portion of the glyphs, (as they would be drawn by cairo_show_glyphs() if the cairo graphics state were set to the same font_face, font_matrix, ctm, and font_options as scaled_font). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_glyphs().
   /// 
   /// Note that whitespace glyphs do not contribute to the size of the rectangle (extents.width and extents.height).
   /// 
@@ -566,7 +566,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Gets the font face that this scaled font uses. This might be the font face passed to cairo_scaled_font_create(), but this does not hold true for all possible cases.
+  /// Gets the font face that this scaled font uses. This might be the font face passed to cairo_scaled_font_create(), but this does not hold true for all possible cases.
   /// 
   /// scaled_font : a font::ScaledFont
   /// 
@@ -580,7 +580,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Stores the font options with which scaled_font was created into options.
+  /// Stores the font options with which scaled_font was created into options.
   /// 
   /// scaled_font : a font::ScaledFont
   /// 
@@ -593,7 +593,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Stores the font matrix with which scaled_font was created into matrix.
+  /// Stores the font matrix with which scaled_font was created into matrix.
   /// 
   /// scaled_font :
   /// 	a font::ScaledFont
@@ -610,7 +610,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Stores the CTM with which scaled_font was created into ctm. Note that the translation offsets (x0, y0) of the CTM are ignored by cairo_scaled_font_create(). So, the matrix this function returns always has 0,0 as x0,y0.
+  /// Stores the CTM with which scaled_font was created into ctm. Note that the translation offsets (x0, y0) of the CTM are ignored by cairo_scaled_font_create(). So, the matrix this function returns always has 0,0 as x0,y0.
   ///
   /// scaled_font :
   /// 	a font::ScaledFont
@@ -627,7 +627,7 @@ impl ScaledFont {
     }
   }
 
-  ///  Stores the scale matrix of scaled_font into matrix. The scale matrix is product of the font matrix and the ctm associated with the scaled font, and hence is the matrix mapping from font space to device space.
+  /// Stores the scale matrix of scaled_font into matrix. The scale matrix is product of the font matrix and the ctm associated with the scaled font, and hence is the matrix mapping from font space to device space.
   /// 
   /// scaled_font :
   /// 	a font::ScaledFont
@@ -644,7 +644,7 @@ impl ScaledFont {
     }
   }
 
-  ///  This function returns the type of the backend used to create a scaled font. See font::font_type::FontType for available types. However, this function never returns CAIRO_FONT_TYPE_TOY.
+  /// This function returns the type of the backend used to create a scaled font. See font::font_type::FontType for available types. However, this function never returns CAIRO_FONT_TYPE_TOY.
   /// 
   /// scaled_font :
   /// 	a font::ScaledFont

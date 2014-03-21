@@ -143,7 +143,7 @@ impl Cairo {
     }
   }
 
-  ///  Makes a copy of the current state of cr and saves it on an internal stack of saved states for cr. When cairo_restore() is called, cr will be restored to the saved state. Multiple calls to cairo_save() and cairo_restore() can be nested; each call to cairo_restore() restores the state from the matching paired cairo_save().
+  /// Makes a copy of the current state of cr and saves it on an internal stack of saved states for cr. When cairo_restore() is called, cr will be restored to the saved state. Multiple calls to cairo_save() and cairo_restore() can be nested; each call to cairo_restore() restores the state from the matching paired cairo_save().
   /// 
   /// It isn't necessary to clear all saved states before a Cairo is freed. If the reference count of a Cairo drops to zero in response to a call to cairo_destroy(), any saved states will be freed along with the Cairo.
   ///
@@ -156,7 +156,7 @@ impl Cairo {
     }
   }
 
-  ///  Restores cr to the state saved by a preceding call to cairo_save() and removes that state from the stack of saved states.
+  /// Restores cr to the state saved by a preceding call to cairo_save() and removes that state from the stack of saved states.
   ///
   /// cr : a Cairo
   ///
@@ -167,7 +167,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the target surface for the cairo context as passed to cairo_create().
+  /// Gets the target surface for the cairo context as passed to cairo_create().
   ///
   /// This function will always return a valid pointer, but the result can be a "nil" surface if cr is already in an error state, (ie. cairo_status() != CAIRO_STATUS_SUCCESS). A nil surface is indicated by cairo_surface_status() != CAIRO_STATUS_SUCCESS.
   ///
@@ -183,7 +183,7 @@ impl Cairo {
     }
   }
 
-  ///  Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to cairo_pop_group() or cairo_pop_group_to_source(). These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
+  /// Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to cairo_pop_group() or cairo_pop_group_to_source(). These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
   ///
   /// This group functionality can be convenient for performing intermediate compositing. One common use of a group is to render objects as opaque within the group, (so that they occlude each other), and then blend the result with translucence onto the destination.
   ///
@@ -214,7 +214,7 @@ impl Cairo {
     }
   }
 
-  ///  Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to cairo_pop_group() or cairo_pop_group_to_source(). These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
+  /// Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to cairo_pop_group() or cairo_pop_group_to_source(). These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
   ///
   /// The group will have a content type of content. The ability to control this content type is the only distinction between this function and cairo_push_group() which you should see for a more detailed description of group rendering.
   ///
@@ -229,7 +229,7 @@ impl Cairo {
     }
   }
 
-  ///  Terminates the redirection begun by a call to cairo_push_group() or cairo_push_group_with_content() and returns a new pattern containing the results of all drawing operations performed to the group.
+  /// Terminates the redirection begun by a call to cairo_push_group() or cairo_push_group_with_content() and returns a new pattern containing the results of all drawing operations performed to the group.
   ///
   /// The cairo_pop_group() function calls cairo_restore(), (balancing a call to cairo_save() by the push_group function), so that any changes to the graphics state will not be visible outside the group.
   ///
@@ -245,7 +245,7 @@ impl Cairo {
     }
   }
 
-  ///  Terminates the redirection begun by a call to cairo_push_group() or cairo_push_group_with_content() and installs the resulting pattern as the source pattern in the given cairo context.
+  /// Terminates the redirection begun by a call to cairo_push_group() or cairo_push_group_with_content() and installs the resulting pattern as the source pattern in the given cairo context.
   ///
   /// The behavior of this function is equivalent to the sequence of operations:
   /// 
@@ -268,7 +268,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current destination surface for the context. This is either the original target surface as passed to cairo_create() or the target surface for the current group as started by the most recent call to cairo_push_group() or cairo_push_group_with_content().
+  /// Gets the current destination surface for the context. This is either the original target surface as passed to cairo_create() or the target surface for the current group as started by the most recent call to cairo_push_group() or cairo_push_group_with_content().
   ///
   /// This function will always return a valid pointer, but the result can be a "nil" surface if cr is already in an error state, (ie. cairo_status() != CAIRO_STATUS_SUCCESS). A nil surface is indicated by cairo_surface_status() != CAIRO_STATUS_SUCCESS.
   ///
@@ -284,7 +284,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the source pattern within cr to an opaque color. This opaque color will then be used for any subsequent drawing operation until a new source pattern is set.
+  /// Sets the source pattern within cr to an opaque color. This opaque color will then be used for any subsequent drawing operation until a new source pattern is set.
   ///
   /// The color components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
   ///
@@ -305,7 +305,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the source pattern within cr to a translucent color. This color will then be used for any subsequent drawing operation until a new source pattern is set.
+  /// Sets the source pattern within cr to a translucent color. This color will then be used for any subsequent drawing operation until a new source pattern is set.
   ///
   /// The color and alpha components are floating point numbers in the range 0 to 1. If the values passed in are outside that range, they will be clamped.
   ///
@@ -328,7 +328,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the source pattern within cr to source. This pattern will then be used for any subsequent drawing operation until a new source pattern is set.
+  /// Sets the source pattern within cr to source. This pattern will then be used for any subsequent drawing operation until a new source pattern is set.
   ///
   /// Note: The pattern's transformation matrix will be locked to the user space in effect at the time of cairo_set_source(). This means that further modifications of the current transformation matrix will not affect the source pattern. See cairo_pattern_set_matrix().
   ///
@@ -345,7 +345,7 @@ impl Cairo {
     }
   }
 
-  ///  This is a convenience function for creating a pattern from surface and setting it as the source in cr with cairo_set_source().
+  /// This is a convenience function for creating a pattern from surface and setting it as the source in cr with cairo_set_source().
   ///
   /// The x and y parameters give the user-space coordinate at which the surface origin should appear. (The surface origin is its upper-left corner before any transformation has been applied.) The x and y parameters are negated and then set as translation values in the pattern matrix.
   ///
@@ -366,7 +366,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current source pattern for cr.
+  /// Gets the current source pattern for cr.
   ///
   /// cr : a cairo context
   ///
@@ -380,7 +380,7 @@ impl Cairo {
     }
   }
 
-  ///  Set the antialiasing mode of the rasterizer used for drawing shapes. This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports CAIRO_ANTIALIAS_SUBPIXEL when drawing shapes.
+  /// Set the antialiasing mode of the rasterizer used for drawing shapes. This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports CAIRO_ANTIALIAS_SUBPIXEL when drawing shapes.
   ///
   /// Note that this option does not affect text rendering, instead see cairo_font_options_set_antialias().
   ///
@@ -395,7 +395,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current shape antialiasing mode, as set by cairo_set_antialias().
+  /// Gets the current shape antialiasing mode, as set by cairo_set_antialias().
   ///
   /// cr : a cairo context
   ///
@@ -409,7 +409,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the dash pattern to be used by cairo_stroke(). A dash pattern is specified by dashes, an array of positive values. Each value provides the length of alternate "on" and "off" portions of the stroke. The offset specifies an offset into the pattern at which the stroke begins.
+  /// Sets the dash pattern to be used by cairo_stroke(). A dash pattern is specified by dashes, an array of positive values. Each value provides the length of alternate "on" and "off" portions of the stroke. The offset specifies an offset into the pattern at which the stroke begins.
   ///
   /// Each "on" segment will have caps applied as if the segment were a separate sub-path. In particular, it is valid to use an "on" length of 0.0 with CAIRO_LINE_CAP_ROUND or CAIRO_LINE_CAP_SQUARE in order to distributed dots or squares along a path.
   ///
@@ -436,7 +436,7 @@ impl Cairo {
     }
   }
 
-  ///  This function returns the length of the dash array in cr (0 if dashing is not currently in effect).
+  /// This function returns the length of the dash array in cr (0 if dashing is not currently in effect).
   ///
   /// See also cairo_set_dash() and cairo_get_dash().
   ///
@@ -452,7 +452,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current dash array. If not NULL, dashes should be big enough to hold at least the number of values returned by cairo_get_dash_count().
+  /// Gets the current dash array. If not NULL, dashes should be big enough to hold at least the number of values returned by cairo_get_dash_count().
   ///
   /// cr : a Cairo
   ///
@@ -474,7 +474,7 @@ impl Cairo {
     }
   }
 
-  ///  Set the current fill rule within the cairo context. The fill rule is used to determine which regions are inside or outside a complex (potentially self-intersecting) path. The current fill rule affects both cairo_fill() and cairo_clip(). See fill_rule::FillRule for details on the semantics of each available fill rule.
+  /// Set the current fill rule within the cairo context. The fill rule is used to determine which regions are inside or outside a complex (potentially self-intersecting) path. The current fill rule affects both cairo_fill() and cairo_clip(). See fill_rule::FillRule for details on the semantics of each available fill rule.
   ///
   /// The default fill rule is CAIRO_FILL_RULE_WINDING.
   ///
@@ -489,7 +489,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current fill rule, as set by cairo_set_fill_rule().
+  /// Gets the current fill rule, as set by cairo_set_fill_rule().
   ///
   /// cr : a cairo context
   ///
@@ -503,7 +503,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current line cap style within the cairo context. See line_cap::LineCap for details about how the available line cap styles are drawn.
+  /// Sets the current line cap style within the cairo context. See line_cap::LineCap for details about how the available line cap styles are drawn.
   ///
   /// As with the other stroke parameters, the current line cap style is examined by cairo_stroke(), cairo_stroke_extents(), and cairo_stroke_to_path(), but does not have any effect during path construction.
   ///
@@ -521,7 +521,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current line cap style, as set by cairo_set_line_cap().
+  /// Gets the current line cap style, as set by cairo_set_line_cap().
   ///
   /// cr : a cairo context
   ///
@@ -535,7 +535,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current line join style within the cairo context. See line_join::LineJoin for details about how the available line join styles are drawn.
+  /// Sets the current line join style within the cairo context. See line_join::LineJoin for details about how the available line join styles are drawn.
   ///
   /// As with the other stroke parameters, the current line join style is examined by cairo_stroke(), cairo_stroke_extents(), and cairo_stroke_to_path(), but does not have any effect during path construction.
   ///
@@ -552,7 +552,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current line join style, as set by cairo_set_line_join().
+  /// Gets the current line join style, as set by cairo_set_line_join().
   ///
   /// cr : a cairo context
   ///
@@ -566,7 +566,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current line width within the cairo context. The line width value specifies the diameter of a pen that is circular in user space, (though device-space pen may be an ellipse in general due to scaling/shear/rotation of the CTM).
+  /// Sets the current line width within the cairo context. The line width value specifies the diameter of a pen that is circular in user space, (though device-space pen may be an ellipse in general due to scaling/shear/rotation of the CTM).
   ///
   /// Note: When the description above refers to user space and CTM it refers to the user space and CTM in effect at the time of the stroking operation, not the user space and CTM in effect at the time of the call to cairo_set_line_width(). The simplest usage makes both of these spaces identical. That is, if there is no change to the CTM between a call to cairo_set_line_width() and the stroking operation, then one can just pass user-space values to cairo_set_line_width() and ignore this note.
   ///
@@ -585,7 +585,7 @@ impl Cairo {
     }
   }
 
-  ///  This function returns the current line width value exactly as set by cairo_set_line_width(). Note that the value is unchanged even if the CTM has changed between the calls to cairo_set_line_width() and cairo_get_line_width().
+  /// This function returns the current line width value exactly as set by cairo_set_line_width(). Note that the value is unchanged even if the CTM has changed between the calls to cairo_set_line_width() and cairo_get_line_width().
   ///
   /// cr : a cairo context
   ///
@@ -599,7 +599,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current miter limit within the cairo context.
+  /// Sets the current miter limit within the cairo context.
   ///
   /// If the current line join style is set to CAIRO_LINE_JOIN_MITER (see cairo_set_line_join()), the miter limit is used to determine whether the lines should be joined with a bevel instead of a miter. Cairo divides the length of the miter by the line width. If the result is greater than the miter limit, the style is converted to a bevel.
   ///
@@ -620,7 +620,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current miter limit, as set by cairo_set_miter_limit().
+  /// Gets the current miter limit, as set by cairo_set_miter_limit().
   ///
   /// cr : a cairo context
   ///
@@ -634,7 +634,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the compositing operator to be used for all drawing operations. See operator::Operator for details on the semantics of each available compositing operator.
+  /// Sets the compositing operator to be used for all drawing operations. See operator::Operator for details on the semantics of each available compositing operator.
   ///
   /// The default operator is CAIRO_OPERATOR_OVER.
   ///
@@ -649,7 +649,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current compositing operator for a cairo context.
+  /// Gets the current compositing operator for a cairo context.
   ///
   /// cr : a cairo context
   ///
@@ -663,7 +663,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the tolerance used when converting paths into trapezoids. Curved segments of the path will be subdivided until the maximum deviation between the original path and the polygonal approximation is less than tolerance. The default value is 0.1. A larger value will give better performance, a smaller value, better appearance. (Reducing the value from the default value of 0.1 is unlikely to improve appearance significantly.) The accuracy of paths within Cairo is limited by the precision of its internal arithmetic, and the prescribed tolerance is restricted to the smallest representable internal value.
+  /// Sets the tolerance used when converting paths into trapezoids. Curved segments of the path will be subdivided until the maximum deviation between the original path and the polygonal approximation is less than tolerance. The default value is 0.1. A larger value will give better performance, a smaller value, better appearance. (Reducing the value from the default value of 0.1 is unlikely to improve appearance significantly.) The accuracy of paths within Cairo is limited by the precision of its internal arithmetic, and the prescribed tolerance is restricted to the smallest representable internal value.
   ///
   /// cr : a Cairo
   ///
@@ -676,7 +676,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current tolerance value, as set by cairo_set_tolerance().
+  /// Gets the current tolerance value, as set by cairo_set_tolerance().
   ///
   /// cr : a cairo context
   ///
@@ -690,7 +690,7 @@ impl Cairo {
     }
   }
 
-  ///  Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by cairo_fill() and according to the current fill rule (see cairo_set_fill_rule()).
+  /// Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by cairo_fill() and according to the current fill rule (see cairo_set_fill_rule()).
   ///
   /// After cairo_clip(), the current path will be cleared from the cairo context.
   ///
@@ -707,7 +707,7 @@ impl Cairo {
     }
   }
 
-  ///  Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by cairo_fill() and according to the current fill rule (see cairo_set_fill_rule()).
+  /// Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by cairo_fill() and according to the current fill rule (see cairo_set_fill_rule()).
   ///
   /// Unlike cairo_clip(), cairo_clip_preserve() preserves the path within the cairo context.
   ///
@@ -724,7 +724,7 @@ impl Cairo {
     }
   }
 
-  ///  Computes a bounding box in user coordinates covering the area inside the current clip.
+  /// Computes a bounding box in user coordinates covering the area inside the current clip.
   ///
   /// cr : a cairo context
   ///
@@ -748,7 +748,7 @@ impl Cairo {
     }
   }
 
-  ///  Tests whether the given point is inside the area that would be visible through the current clip, i.e. the area that would be filled by a cairo_paint() operation.
+  /// Tests whether the given point is inside the area that would be visible through the current clip, i.e. the area that would be filled by a cairo_paint() operation.
   ///
   /// See cairo_clip(), and cairo_clip_preserve().
   ///
@@ -768,7 +768,7 @@ impl Cairo {
     }
   }
 
-  ///  Reset the current clip region to its original, unrestricted state. That is, set the clip region to an infinitely large shape containing the target surface. Equivalently, if infinity is too hard to grasp, one can imagine the clip region being reset to the exact bounds of the target surface.
+  /// Reset the current clip region to its original, unrestricted state. That is, set the clip region to an infinitely large shape containing the target surface. Equivalently, if infinity is too hard to grasp, one can imagine the clip region being reset to the exact bounds of the target surface.
   ///
   /// Note that code meant to be reusable should not call cairo_reset_clip() as it will cause results unexpected by higher-level code which calls cairo_clip(). Consider using cairo_save() and cairo_restore() around cairo_clip() as a more robust means of temporarily restricting the clip region.
   ///
@@ -781,7 +781,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that fills the current path according to the current fill rule, (each sub-path is implicitly closed before being filled). After cairo_fill(), the current path will be cleared from the cairo context. See cairo_set_fill_rule() and cairo_fill_preserve().
+  /// A drawing operator that fills the current path according to the current fill rule, (each sub-path is implicitly closed before being filled). After cairo_fill(), the current path will be cleared from the cairo context. See cairo_set_fill_rule() and cairo_fill_preserve().
   ///
   /// cr : a cairo context
   ///
@@ -792,7 +792,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that fills the current path according to the current fill rule, (each sub-path is implicitly closed before being filled). Unlike cairo_fill(), cairo_fill_preserve() preserves the path within the cairo context.
+  /// A drawing operator that fills the current path according to the current fill rule, (each sub-path is implicitly closed before being filled). Unlike cairo_fill(), cairo_fill_preserve() preserves the path within the cairo context.
   ///
   /// See cairo_set_fill_rule() and cairo_fill().
   /// 
@@ -805,7 +805,7 @@ impl Cairo {
     }
   }
 
-  ///  Computes a bounding box in user coordinates covering the area that would be affected, (the "inked" area), by a cairo_fill() operation given the current path and fill parameters. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Surface dimensions and clipping are not taken into account.
+  /// Computes a bounding box in user coordinates covering the area that would be affected, (the "inked" area), by a cairo_fill() operation given the current path and fill parameters. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Surface dimensions and clipping are not taken into account.
   ///
   /// Contrast with cairo_path_extents(), which is similar, but returns non-zero extents for some paths with no inked area, (such as a simple line segment).
   ///
@@ -835,7 +835,7 @@ impl Cairo {
     }
   }
 
-  ///  Tests whether the given point is inside the area that would be affected by a cairo_fill() operation given the current path and filling parameters. Surface dimensions and clipping are not taken into account.
+  /// Tests whether the given point is inside the area that would be affected by a cairo_fill() operation given the current path and filling parameters. Surface dimensions and clipping are not taken into account.
   ///
   /// See cairo_fill(), cairo_set_fill_rule() and cairo_fill_preserve().
   ///
@@ -855,7 +855,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that paints the current source using the alpha channel of pattern as a mask. (Opaque areas of pattern are painted with the source, transparent areas are not painted.)
+  /// A drawing operator that paints the current source using the alpha channel of pattern as a mask. (Opaque areas of pattern are painted with the source, transparent areas are not painted.)
   ///
   /// cr : a cairo context
   ///
@@ -868,7 +868,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that paints the current source using the alpha channel of surface as a mask. (Opaque areas of surface are painted with the source, transparent areas are not painted.)
+  /// A drawing operator that paints the current source using the alpha channel of surface as a mask. (Opaque areas of surface are painted with the source, transparent areas are not painted.)
   ///
   /// cr : a cairo context
   ///
@@ -885,7 +885,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that paints the current source everywhere within the current clip region.
+  /// A drawing operator that paints the current source everywhere within the current clip region.
   ///
   /// cr : a cairo context
   ///
@@ -896,7 +896,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that paints the current source everywhere within the current clip region using a mask of constant alpha value alpha. The effect is similar to cairo_paint(), but the drawing is faded out using the alpha value.
+  /// A drawing operator that paints the current source everywhere within the current clip region using a mask of constant alpha value alpha. The effect is similar to cairo_paint(), but the drawing is faded out using the alpha value.
   ///
   /// cr : a cairo context
   ///
@@ -909,7 +909,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. After cairo_stroke(), the current path will be cleared from the cairo context. See cairo_set_line_width(), cairo_set_line_join(), cairo_set_line_cap(), cairo_set_dash(), and cairo_stroke_preserve().
+  /// A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. After cairo_stroke(), the current path will be cleared from the cairo context. See cairo_set_line_width(), cairo_set_line_join(), cairo_set_line_cap(), cairo_set_dash(), and cairo_stroke_preserve().
   ///
   /// Note: Degenerate segments and sub-paths are treated specially and provide a useful result. These can result in two different situations:
   ///
@@ -928,7 +928,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. Unlike cairo_stroke(), cairo_stroke_preserve() preserves the path within the cairo context.
+  /// A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. Unlike cairo_stroke(), cairo_stroke_preserve() preserves the path within the cairo context.
   ///
   /// See cairo_set_line_width(), cairo_set_line_join(), cairo_set_line_cap(), cairo_set_dash(), and cairo_stroke_preserve().
   ///
@@ -941,7 +941,7 @@ impl Cairo {
     }
   }
 
-  ///  Computes a bounding box in user coordinates covering the area that would be affected, (the "inked" area), by a cairo_stroke() operation given the current path and stroke parameters. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Surface dimensions and clipping are not taken into account.
+  /// Computes a bounding box in user coordinates covering the area that would be affected, (the "inked" area), by a cairo_stroke() operation given the current path and stroke parameters. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Surface dimensions and clipping are not taken into account.
   ///
   /// Note that if the line width is set to exactly zero, then cairo_stroke_extents() will return an empty rectangle. Contrast with cairo_path_extents() which can be used to compute the non-empty bounds as the line width approaches zero.
   ///
@@ -971,7 +971,7 @@ impl Cairo {
     }
   }
 
-  ///  Tests whether the given point is inside the area that would be affected by a cairo_stroke() operation given the current path and stroking parameters. Surface dimensions and clipping are not taken into account.
+  /// Tests whether the given point is inside the area that would be affected by a cairo_stroke() operation given the current path and stroking parameters. Surface dimensions and clipping are not taken into account.
   ///
   /// See cairo_stroke(), cairo_set_line_width(), cairo_set_line_join(), cairo_set_line_cap(), cairo_set_dash(), and cairo_stroke_preserve().
   ///
@@ -991,7 +991,7 @@ impl Cairo {
     }
   }
 
-  ///  Emits the current page for backends that support multiple pages, but doesn't clear it, so, the contents of the current page will be retained for the next page too. Use cairo_show_page() if you want to get an empty page after the emission.
+  /// Emits the current page for backends that support multiple pages, but doesn't clear it, so, the contents of the current page will be retained for the next page too. Use cairo_show_page() if you want to get an empty page after the emission.
   ///
   /// This is a convenience function that simply calls cairo_surface_copy_page() on cr's target.
   ///
@@ -1004,7 +1004,7 @@ impl Cairo {
     }
   }
 
-  ///  Emits and clears the current page for backends that support multiple pages. Use cairo_copy_page() if you don't want to clear the page.
+  /// Emits and clears the current page for backends that support multiple pages. Use cairo_copy_page() if you don't want to clear the page.
   ///
   /// This is a convenience function that simply calls cairo_surface_show_page() on cr's target.
   ///
@@ -1017,7 +1017,7 @@ impl Cairo {
     }
   }
 
-  ///  Returns the current reference count of cr.
+  /// Returns the current reference count of cr.
   ///
   /// cr : a Cairo
   ///
@@ -1031,7 +1031,7 @@ impl Cairo {
     }
   }
 
-  ///  Creates a copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
+  /// Creates a copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
   ///
   /// This function will always return a valid pointer, but the result will have no data (data==NULL and num_data==0), if either of the following conditions hold:
   ///
@@ -1051,7 +1051,7 @@ impl Cairo {
   }
 
 
-  ///  Gets a flattened copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
+  /// Gets a flattened copy of the current path and returns it to the user as a path::Path. See cairo_path_data_t for hints on how to iterate over the returned data structure.
   /// 
   /// This function is like cairo_copy_path() except that any curves in the path will be approximated with piecewise-linear approximations, (accurate to within the current tolerance value). That is, the result is guaranteed to not have any elements of type CAIRO_PATH_CURVE_TO which will instead be replaced by a series of CAIRO_PATH_LINE_TO elements.
   ///
@@ -1072,7 +1072,7 @@ impl Cairo {
     }
   }
 
-  ///  Append the path onto the current path. The path may be either the return value from one of cairo_copy_path() or cairo_copy_path_flat() or it may be constructed manually. See path::Path for details on how the path data structure should be initialized, and note that path->status must be initialized to CAIRO_STATUS_SUCCESS.
+  /// Append the path onto the current path. The path may be either the return value from one of cairo_copy_path() or cairo_copy_path_flat() or it may be constructed manually. See path::Path for details on how the path data structure should be initialized, and note that path->status must be initialized to CAIRO_STATUS_SUCCESS.
   ///
   /// cr : a cairo context
   ///
@@ -1085,7 +1085,7 @@ impl Cairo {
     }
   }
 
-  ///  Returns whether a current point is defined on the current path. See cairo_get_current_point() for details on the current point.
+  /// Returns whether a current point is defined on the current path. See cairo_get_current_point() for details on the current point.
   ///
   /// cr : a cairo context
   ///
@@ -1099,7 +1099,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current point of the current path, which is conceptually the final point reached by the path so far.
+  /// Gets the current point of the current path, which is conceptually the final point reached by the path so far.
   ///
   /// The current point is returned in the user-space coordinate system. If there is no defined current point or if cr is in an error status, x and y will both be set to 0.0. It is possible to check this in advance with cairo_has_current_point().
   ///
@@ -1125,7 +1125,7 @@ impl Cairo {
     }
   }
 
-  ///  Clears the current path. After this call there will be no path and no current point.
+  /// Clears the current path. After this call there will be no path and no current point.
   ///
   /// cr : a cairo context
   ///
@@ -1136,7 +1136,7 @@ impl Cairo {
     }
   }
 
-  ///  Begin a new sub-path. Note that the existing path is not affected. After this call there will be no current point.
+  /// Begin a new sub-path. Note that the existing path is not affected. After this call there will be no current point.
   ///
   /// In many cases, this call is not needed since new sub-paths are frequently started with cairo_move_to().
   ///
@@ -1151,7 +1151,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds a line segment to the path from the current point to the beginning of the current sub-path, (the most recent point passed to cairo_move_to()), and closes this sub-path. After this call the current point will be at the joined endpoint of the sub-path.
+  /// Adds a line segment to the path from the current point to the beginning of the current sub-path, (the most recent point passed to cairo_move_to()), and closes this sub-path. After this call the current point will be at the joined endpoint of the sub-path.
   ///
   /// The behavior of cairo_close_path() is distinct from simply calling cairo_line_to() with the equivalent coordinate in the case of stroking. When a closed sub-path is stroked, there are no caps on the ends of the sub-path. Instead, there is a line join connecting the final and initial segments of the sub-path.
   ///
@@ -1168,7 +1168,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds a circular arc of the given radius to the current path. The arc is centered at (xc, yc), begins at angle1 and proceeds in the direction of increasing angles to end at angle2. If angle2 is less than angle1 it will be progressively increased by 2*M_PI until it is greater than angle1.
+  /// Adds a circular arc of the given radius to the current path. The arc is centered at (xc, yc), begins at angle1 and proceeds in the direction of increasing angles to end at angle2. If angle2 is less than angle1 it will be progressively increased by 2*M_PI until it is greater than angle1.
   ///
   /// If there is a current point, an initial line segment will be added to the path to connect the current point to the beginning of the arc. If this initial line is undesired, it can be avoided by calling cairo_new_sub_path() before calling cairo_arc().
   ///
@@ -1207,7 +1207,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds a circular arc of the given radius to the current path. The arc is centered at (xc, yc), begins at angle1 and proceeds in the direction of decreasing angles to end at angle2. If angle2 is greater than angle1 it will be progressively decreased by 2*M_PI until it is less than angle1.
+  /// Adds a circular arc of the given radius to the current path. The arc is centered at (xc, yc), begins at angle1 and proceeds in the direction of decreasing angles to end at angle2. If angle2 is greater than angle1 it will be progressively decreased by 2*M_PI until it is less than angle1.
   ///
   /// See cairo_arc() for more details. This function differs only in the direction of the arc between the two angles.
   ///
@@ -1231,7 +1231,7 @@ impl Cairo {
   }
 
 
-  ///  Adds a cubic Bézier spline to the path from the current point to position (x3, y3) in user-space coordinates, using (x1, y1) and (x2, y2) as the control points. After this call the current point will be (x3, y3).
+  /// Adds a cubic Bézier spline to the path from the current point to position (x3, y3) in user-space coordinates, using (x1, y1) and (x2, y2) as the control points. After this call the current point will be (x3, y3).
   ///
   /// If there is no current point before the call to cairo_curve_to() this function will behave as if preceded by a call to cairo_move_to(cr, x1, y1).
   ///
@@ -1256,7 +1256,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds a line to the path from the current point to position (x, y) in user-space coordinates. After this call the current point will be (x, y).
+  /// Adds a line to the path from the current point to position (x, y) in user-space coordinates. After this call the current point will be (x, y).
   ///
   /// If there is no current point before the call to cairo_line_to() this function will behave as cairo_move_to(cr, x, y).
   ///
@@ -1273,7 +1273,7 @@ impl Cairo {
     }
   }
 
-  ///  Begin a new sub-path. After this call the current point will be (x, y).
+  /// Begin a new sub-path. After this call the current point will be (x, y).
   ///
   /// cr : a cairo context
   ///
@@ -1289,7 +1289,7 @@ impl Cairo {
   }
 
 
-  ///  Adds a closed sub-path rectangle of the given size to the current path at position (x, y) in user-space coordinates.
+  /// Adds a closed sub-path rectangle of the given size to the current path at position (x, y) in user-space coordinates.
   ///
   /// This function is logically equivalent to:
   ///	
@@ -1317,7 +1317,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds closed paths for the glyphs to the current path. The generated path if filled, achieves an effect similar to that of cairo_show_glyphs().
+  /// Adds closed paths for the glyphs to the current path. The generated path if filled, achieves an effect similar to that of cairo_show_glyphs().
   ///
   /// cr : a cairo context
   ///
@@ -1332,7 +1332,7 @@ impl Cairo {
     }
   }
 
-  ///  Adds closed paths for text to the current path. The generated path if filled, achieves an effect similar to that of cairo_show_text().
+  /// Adds closed paths for text to the current path. The generated path if filled, achieves an effect similar to that of cairo_show_text().
   ///
   /// Text conversion and positioning is done similar to cairo_show_text().
   ///
@@ -1352,7 +1352,7 @@ impl Cairo {
     }
   }
 
-  ///  Relative-coordinate version of cairo_curve_to(). All offsets are relative to the current point. Adds a cubic Bézier spline to the path from the current point to a point offset from the current point by (dx3, dy3), using points offset by (dx1, dy1) and (dx2, dy2) as the control points. After this call the current point will be offset by (dx3, dy3).
+  /// Relative-coordinate version of cairo_curve_to(). All offsets are relative to the current point. Adds a cubic Bézier spline to the path from the current point to a point offset from the current point by (dx3, dy3), using points offset by (dx1, dy1) and (dx2, dy2) as the control points. After this call the current point will be offset by (dx3, dy3).
   ///
   /// Given a current point of (x, y), cairo_rel_curve_to(cr, dx1, dy1, dx2, dy2, dx3, dy3) is logically equivalent to cairo_curve_to(cr, x+dx1, y+dy1, x+dx2, y+dy2, x+dx3, y+dy3).
   ///
@@ -1379,7 +1379,7 @@ impl Cairo {
     }
   }
 
-  ///  Relative-coordinate version of cairo_line_to(). Adds a line to the path from the current point to a point that is offset from the current point by (dx, dy) in user space. After this call the current point will be offset by (dx, dy).
+  /// Relative-coordinate version of cairo_line_to(). Adds a line to the path from the current point to a point that is offset from the current point by (dx, dy) in user space. After this call the current point will be offset by (dx, dy).
   ///
   /// Given a current point of (x, y), cairo_rel_line_to(cr, dx, dy) is logically equivalent to cairo_line_to(cr, x + dx, y + dy).
   ///
@@ -1398,7 +1398,7 @@ impl Cairo {
     }
   }
 
-  ///  Begin a new sub-path. After this call the current point will offset by (x, y).
+  /// Begin a new sub-path. After this call the current point will offset by (x, y).
   ///
   /// Given a current point of (x, y), cairo_rel_move_to(cr, dx, dy) is logically equivalent to cairo_move_to(cr, x + dx, y + dy).
   ///
@@ -1417,7 +1417,7 @@ impl Cairo {
     }
   }
 
-  ///  Computes a bounding box in user-space coordinates covering the points on the current path. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Stroke parameters, fill rule, surface dimensions and clipping are not taken into account.
+  /// Computes a bounding box in user-space coordinates covering the points on the current path. If the current path is empty, returns an empty rectangle ((0,0), (0,0)). Stroke parameters, fill rule, surface dimensions and clipping are not taken into account.
   ///
   /// Contrast with cairo_fill_extents() and cairo_stroke_extents() which return the extents of only the area that would be "inked" by the corresponding drawing operations.
   ///
@@ -1447,7 +1447,7 @@ impl Cairo {
     }
   }
 
-  ///  Modifies the current transformation matrix (CTM) by translating the user-space origin by (tx, ty). This offset is interpreted as a user-space coordinate according to the CTM in place before the new call to cairo_translate(). In other words, the translation of the user-space origin takes place after any existing transformation.
+  /// Modifies the current transformation matrix (CTM) by translating the user-space origin by (tx, ty). This offset is interpreted as a user-space coordinate according to the CTM in place before the new call to cairo_translate(). In other words, the translation of the user-space origin takes place after any existing transformation.
   ///
   /// cr : a cairo context
   ///
@@ -1462,7 +1462,7 @@ impl Cairo {
     }
   }
 
-  ///  Modifies the current transformation matrix (CTM) by scaling the X and Y user-space axes by sx and sy respectively. The scaling of the axes takes place after any existing transformation of user space.
+  /// Modifies the current transformation matrix (CTM) by scaling the X and Y user-space axes by sx and sy respectively. The scaling of the axes takes place after any existing transformation of user space.
   ///
   /// cr : a cairo context
   ///
@@ -1477,7 +1477,7 @@ impl Cairo {
     }
   }
 
-  ///  Modifies the current transformation matrix (CTM) by rotating the user-space axes by angle radians. The rotation of the axes takes places after any existing transformation of user space. The rotation direction for positive angles is from the positive X axis toward the positive Y axis.
+  /// Modifies the current transformation matrix (CTM) by rotating the user-space axes by angle radians. The rotation of the axes takes places after any existing transformation of user space. The rotation direction for positive angles is from the positive X axis toward the positive Y axis.
   ///
   /// cr : a cairo context
   ///
@@ -1491,7 +1491,7 @@ impl Cairo {
   }
 
 
-  ///  Modifies the current transformation matrix (CTM) by applying matrix as an additional transformation. The new transformation of user space takes place after any existing transformation.
+  /// Modifies the current transformation matrix (CTM) by applying matrix as an additional transformation. The new transformation of user space takes place after any existing transformation.
   ///
   /// cr : a cairo context
   ///
@@ -1504,7 +1504,7 @@ impl Cairo {
     }
   }
 
-  ///  Modifies the current transformation matrix (CTM) by setting it equal to matrix.
+  /// Modifies the current transformation matrix (CTM) by setting it equal to matrix.
   ///
   /// cr : a cairo context
   ///
@@ -1517,7 +1517,7 @@ impl Cairo {
     }
   }
 
-  ///  Stores the current transformation matrix (CTM) into matrix.
+  /// Stores the current transformation matrix (CTM) into matrix.
   ///
   /// cr : a cairo context
   ///
@@ -1532,7 +1532,7 @@ impl Cairo {
     }
   }
 
-  ///  Resets the current transformation matrix (CTM) by setting it equal to the identity matrix. That is, the user-space and device-space axes will be aligned and one user-space unit will transform to one device-space unit.
+  /// Resets the current transformation matrix (CTM) by setting it equal to the identity matrix. That is, the user-space and device-space axes will be aligned and one user-space unit will transform to one device-space unit.
   ///
   /// cr : a cairo context
   ///
@@ -1544,7 +1544,7 @@ impl Cairo {
   }
 
 
-  ///  Transform a coordinate from user space to device space by multiplying the given point by the current transformation matrix (CTM).
+  /// Transform a coordinate from user space to device space by multiplying the given point by the current transformation matrix (CTM).
   ///
   /// cr : a cairo context
   ///
@@ -1562,7 +1562,7 @@ impl Cairo {
     }
   }
 
-  ///  Transform a distance vector from user space to device space. This function is similar to cairo_user_to_device() except that the translation components of the CTM will be ignored when transforming (dx,dy).
+  /// Transform a distance vector from user space to device space. This function is similar to cairo_user_to_device() except that the translation components of the CTM will be ignored when transforming (dx,dy).
   ///
   /// cr : a cairo context
   ///
@@ -1580,7 +1580,7 @@ impl Cairo {
     }
   }
 
-  ///  Transform a coordinate from device space to user space by multiplying the given point by the inverse of the current transformation matrix (CTM).
+  /// Transform a coordinate from device space to user space by multiplying the given point by the inverse of the current transformation matrix (CTM).
   ///
   /// cr : a cairo
   ///
@@ -1599,7 +1599,7 @@ impl Cairo {
   }
 
 
-  ///  Transform a distance vector from device space to user space. This function is similar to cairo_device_to_user() except that the translation components of the inverse CTM will be ignored when transforming (dx,dy).
+  /// Transform a distance vector from device space to user space. This function is similar to cairo_device_to_user() except that the translation components of the inverse CTM will be ignored when transforming (dx,dy).
   ///
   /// cr : a cairo context
   ///
@@ -1617,7 +1617,7 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
+  /// Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   ///
   /// cr : a Cairo
   ///
@@ -1631,7 +1631,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current font matrix to a scale by a factor of size, replacing any font matrix previously set with cairo_set_font_size() or cairo_set_font_matrix(). This results in a font size of size user space units. (More precisely, this matrix will result in the font's em-square being a size by size square in user space.)
+  /// Sets the current font matrix to a scale by a factor of size, replacing any font matrix previously set with cairo_set_font_size() or cairo_set_font_matrix(). This results in a font size of size user space units. (More precisely, this matrix will result in the font's em-square being a size by size square in user space.)
   ///
   /// If text is drawn without a call to cairo_set_font_size(), (nor cairo_set_font_matrix() nor cairo_set_scaled_font()), the default font size is 10.0.
   ///
@@ -1646,7 +1646,7 @@ impl Cairo {
     }
   }
 
-  ///  Sets the current font matrix to matrix. The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see cairo_set_font_size()), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes
+  /// Sets the current font matrix to matrix. The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see cairo_set_font_size()), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes
   ///
   /// cr : a Cairo
   ///
@@ -1659,7 +1659,7 @@ impl Cairo {
     }
   }
 
-  ///  Stores the current font matrix into matrix. See cairo_set_font_matrix().
+  /// Stores the current font matrix into matrix. See cairo_set_font_matrix().
   ///
   /// cr : a Cairo
   ///
@@ -1675,7 +1675,7 @@ impl Cairo {
   }
 
 
-  ///  Sets a set of custom font rendering options for the Cairo. Rendering options are derived by merging these options with the options derived from underlying surface; if the value in options has a default value (like CAIRO_ANTIALIAS_DEFAULT), then the value from the surface is used.
+  /// Sets a set of custom font rendering options for the Cairo. Rendering options are derived by merging these options with the options derived from underlying surface; if the value in options has a default value (like CAIRO_ANTIALIAS_DEFAULT), then the value from the surface is used.
   ///
   /// cr : a Cairo
   ///
@@ -1688,7 +1688,7 @@ impl Cairo {
     }
   }
 
-  ///  Retrieves font rendering options set via cairo_set_font_options. Note that the returned options do not include any options derived from the underlying surface; they are literally the options passed to cairo_set_font_options().
+  /// Retrieves font rendering options set via cairo_set_font_options. Note that the returned options do not include any options derived from the underlying surface; they are literally the options passed to cairo_set_font_options().
   ///
   /// cr : a Cairo
   ///
@@ -1701,7 +1701,7 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
+  /// Replaces the current font::FontFace object in the Cairo with font_face. The replaced font face in the Cairo will be destroyed if there are no other references to it.
   /// 
   /// cr : a Cairo
   ///
@@ -1714,7 +1714,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current font face for a Cairo.
+  /// Gets the current font face for a Cairo.
   ///
   /// cr : a Cairo
   ///
@@ -1729,7 +1729,7 @@ impl Cairo {
     }
   }
 
-  ///  Replaces the current font face, font matrix, and font options in the Cairo with those of the font::ScaledFont. Except for some translation, the current CTM of the Cairo should be the same as that of the font::ScaledFont, which can be accessed using cairo_scaled_font_get_ctm().
+  /// Replaces the current font face, font matrix, and font options in the Cairo with those of the font::ScaledFont. Except for some translation, the current CTM of the Cairo should be the same as that of the font::ScaledFont, which can be accessed using cairo_scaled_font_get_ctm().
   ///
   /// cr : a Cairo
   ///
@@ -1742,7 +1742,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the current scaled font for a Cairo.
+  /// Gets the current scaled font for a Cairo.
   ///
   /// cr : a Cairo
   ///
@@ -1757,7 +1757,7 @@ impl Cairo {
     }
   }
 
-  ///  A drawing operator that generates the shape from a string of UTF-8 characters, rendered according to the current font_face, font_size (font_matrix), and font_options.
+  /// A drawing operator that generates the shape from a string of UTF-8 characters, rendered according to the current font_face, font_size (font_matrix), and font_options.
   ///
   /// This function first computes a set of glyphs for the string of text. The first glyph is placed so that its origin is at the current point. The origin of each subsequent glyph is offset from that of the previous glyph by the advance values of the previous glyph.
   ///
@@ -1777,7 +1777,7 @@ impl Cairo {
   }
 
 
-  ///  A drawing operator that generates the shape from an array of glyphs, rendered according to the current font face, font size (font matrix), and font options.
+  /// A drawing operator that generates the shape from an array of glyphs, rendered according to the current font face, font size (font matrix), and font options.
   ///
   /// cr : a cairo context
   ///
@@ -1792,7 +1792,7 @@ impl Cairo {
     }
   }
 
-  ///  This operation has rendering effects similar to cairo_show_glyphs() but, if the target surface supports it, uses the provided text and cluster mapping to embed the text for the glyphs shown in the output. If the target does not support the extended attributes, this function acts like the basic cairo_show_glyphs() as if it had been passed glyphs and num_glyphs.
+  /// This operation has rendering effects similar to cairo_show_glyphs() but, if the target surface supports it, uses the provided text and cluster mapping to embed the text for the glyphs shown in the output. If the target does not support the extended attributes, this function acts like the basic cairo_show_glyphs() as if it had been passed glyphs and num_glyphs.
   ///
   /// The mapping between utf8 and glyphs is provided by an array of clusters. Each cluster covers a number of text bytes and glyphs, and neighboring clusters cover neighboring areas of utf8 and glyphs. The clusters should collectively cover utf8 and glyphs in entirety.
   ///
@@ -1823,7 +1823,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the font extents for the currently selected font.
+  /// Gets the font extents for the currently selected font.
   ///
   /// cr : a Cairo
   ///
@@ -1838,7 +1838,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the extents for a string of text. The extents describe a user-space rectangle that encloses the "inked" portion of the text, (as it would be drawn by cairo_show_text()). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_text().
+  /// Gets the extents for a string of text. The extents describe a user-space rectangle that encloses the "inked" portion of the text, (as it would be drawn by cairo_show_text()). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_text().
   ///
   /// Note that whitespace characters do not directly contribute to the size of the rectangle (extents.width and extents.height). They do contribute indirectly by changing the position of non-whitespace characters. In particular, trailing whitespace characters are likely to not affect the size of the rectangle, though they will affect the x_advance and y_advance values.
   ///
@@ -1857,7 +1857,7 @@ impl Cairo {
     }
   }
 
-  ///  Gets the extents for an array of glyphs. The extents describe a user-space rectangle that encloses the "inked" portion of the glyphs, (as they would be drawn by cairo_show_glyphs()). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_glyphs().
+  /// Gets the extents for an array of glyphs. The extents describe a user-space rectangle that encloses the "inked" portion of the glyphs, (as they would be drawn by cairo_show_glyphs()). Additionally, the x_advance and y_advance values indicate the amount by which the current point would be advanced by cairo_show_glyphs().
   ///
   /// Note that whitespace glyphs do not contribute to the size of the rectangle (extents.width and extents.height).
   ///

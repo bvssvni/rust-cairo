@@ -1,6 +1,6 @@
 //! Describe font subpixel order
 
-///  The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of CAIRO_ANTIALIAS_SUBPIXEL.
+/// The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of CAIRO_ANTIALIAS_SUBPIXEL.
 /// 
 /// Since 1.0
 #[repr(i32)]

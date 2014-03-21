@@ -15,7 +15,7 @@ pub struct Region {
   opaque: *mut std::libc::c_void
 }
 
-///  A data structure for holding a rectangle with integer coordinates.
+/// A data structure for holding a rectangle with integer coordinates.
 /// 
 /// Since 1.10
 pub struct Rectangle {
@@ -42,7 +42,7 @@ impl Region {
     }
   }
 
-  ///  Allocates a new region object containing rectangle.
+  /// Allocates a new region object containing rectangle.
   /// 
   /// rectangle : a region::Rectangle
   /// 
@@ -56,7 +56,7 @@ impl Region {
     }
   }
 
-  ///  Allocates a new region object containing the union of all given rects.
+  /// Allocates a new region object containing the union of all given rects.
   /// 
   /// rects : an array of count rectangles
   ///
@@ -72,7 +72,7 @@ impl Region {
     }
   }
 
-  ///  Checks whether an error has previous occurred for this region object.
+  /// Checks whether an error has previous occurred for this region object.
   /// 
   /// region : a region::Region
   ///
@@ -86,7 +86,7 @@ impl Region {
     }
   }
 
-  ///  Gets the bounding rectangle of region as a region::Rectangle
+  /// Gets the bounding rectangle of region as a region::Rectangle
   /// 
   /// region : a region::Region
   ///
@@ -101,7 +101,7 @@ impl Region {
     }
   }
 
-  ///  Returns the number of rectangles contained in region.
+  /// Returns the number of rectangles contained in region.
   /// 
   /// region : a region::Region
   /// 
@@ -115,7 +115,7 @@ impl Region {
     }
   }
 
-  ///  Stores the nth rectangle from the region in rectangle.
+  /// Stores the nth rectangle from the region in rectangle.
   /// 
   /// region : a region::Region
   ///
@@ -132,7 +132,7 @@ impl Region {
     }
   }
 
-  ///  Checks whether region is empty.
+  /// Checks whether region is empty.
   /// 
   /// region : a region::Region
   ///
@@ -146,7 +146,7 @@ impl Region {
     }
   }
 
-  ///  Checks whether (x, y) is contained in region.
+  /// Checks whether (x, y) is contained in region.
   /// 
   /// region : a region::Region
   ///
@@ -164,7 +164,7 @@ impl Region {
     }
   }
 
-  ///  Checks whether rectangle is inside, outside or partially contained in region
+  /// Checks whether rectangle is inside, outside or partially contained in region
   /// 
   /// region : a region::Region
   /// 
@@ -180,7 +180,7 @@ impl Region {
     }
   }
 
-  ///  Compares whether region_a is equivalent to region_b. NULL as an argument is equal to itself, but not to any non-NULL region.
+  /// Compares whether region_a is equivalent to region_b. NULL as an argument is equal to itself, but not to any non-NULL region.
   ///
   /// a : a region::Region or NULL
   ///
@@ -196,7 +196,7 @@ impl Region {
     }
   }
 
-  ///  Translates region by (dx, dy).
+  /// Translates region by (dx, dy).
   /// 
   /// region : a region::Region
   ///
@@ -211,7 +211,7 @@ impl Region {
     }
   }
 
-  ///  Computes the intersection of dst with rectangle and places the result in dst
+  /// Computes the intersection of dst with rectangle and places the result in dst
   /// 
   /// dst : a region::Region
   ///
@@ -227,7 +227,7 @@ impl Region {
     }
   }
 
-  ///  Subtracts other from dst and places the result in dst
+  /// Subtracts other from dst and places the result in dst
   /// 
   /// dst : a region::Region
   ///
@@ -243,7 +243,7 @@ impl Region {
     }
   }
 
-  ///  Subtracts rectangle from dst and places the result in dst
+  /// Subtracts rectangle from dst and places the result in dst
   /// 
   /// dst : a region::Region
   ///
@@ -259,7 +259,7 @@ impl Region {
     }
   }
 
-  ///  Computes the union of dst with other and places the result in dst
+  /// Computes the union of dst with other and places the result in dst
   /// 
   /// dst : a region::Region
   ///
@@ -275,7 +275,7 @@ impl Region {
     }
   }
 
-  ///  Computes the union of dst with rectangle and places the result in dst.
+  /// Computes the union of dst with rectangle and places the result in dst.
   /// 
   /// dst : a region::Region
   ///
@@ -291,7 +291,7 @@ impl Region {
     }
   }
 
-  ///  Computes the exclusive difference of dst with other and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in other, but not in both.
+  /// Computes the exclusive difference of dst with other and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in other, but not in both.
   /// 
   /// dst : a region::Region
   ///
@@ -307,7 +307,7 @@ impl Region {
     }
   }
 
-  ///  Computes the exclusive difference of dst with rectangle and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in rectangle, but not in both.
+  /// Computes the exclusive difference of dst with rectangle and places the result in dst. That is, dst will be set to contain all areas that are either in dst or in rectangle, but not in both.
   /// 
   /// dst : a region::Region
   ///

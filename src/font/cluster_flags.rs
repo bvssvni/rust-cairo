@@ -1,6 +1,6 @@
 //! Describe font cluster flags
 
-///  Specifies properties of a text cluster mapping.
+/// Specifies properties of a text cluster mapping.
 /// 
 /// Since 1.8
 #[repr(i32)]

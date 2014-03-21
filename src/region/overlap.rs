@@ -1,6 +1,6 @@
 //! Describe region overlap.
 
-///  Used as the return value for cairo_region_contains_rectangle().
+/// Used as the return value for cairo_region_contains_rectangle().
 /// 
 /// Since 1.10
 #[repr(i32)]

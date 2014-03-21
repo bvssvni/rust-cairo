@@ -1,6 +1,6 @@
 //! Describe font weight
 
-///  Specifies variants of a font face based on their weight.
+/// Specifies variants of a font face based on their weight.
 /// 
 /// Since 1.0i
 #[repr(i32)]

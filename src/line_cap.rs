@@ -1,6 +1,6 @@
 //! Describe how to render the endpoints of the path when stroking
 
-///  Specifies how to render the endpoints of the path when stroking.
+/// Specifies how to render the endpoints of the path when stroking.
 /// 
 /// The default line cap style is CAIRO_LINE_CAP_BUTT.
 /// 

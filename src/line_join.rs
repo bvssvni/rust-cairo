@@ -1,6 +1,6 @@
 //! Descirbe how to render the junction of two lines
 
-///  Specifies how to render the junction of two lines when stroking.
+/// Specifies how to render the junction of two lines when stroking.
 /// 
 /// The default line join style is CAIRO_LINE_JOIN_MITER.
 /// 
