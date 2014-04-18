@@ -1,7 +1,9 @@
-#[crate_id = "cairo"];
-#[deny(missing_doc)];
+#![crate_id = "cairo"]
+#![deny(missing_doc)]
 
 //! A Cairo bindings library.
+
+extern crate libc;
 
 #[link(name = "cairo")]
 extern {}
@@ -109,7 +111,7 @@ pub enum Status {
 /// Since 1.0
 pub struct Cairo {
   /// Wraps the Cairo pointer for context.
-  opaque: *mut std::libc::c_void
+  opaque: *mut libc::c_void
 }
 
 impl Cairo {
@@ -461,11 +463,9 @@ impl Cairo {
   /// offset : return value for the current dash offset, or NULL
   ///
   /// Since 1.4
-  pub fn get_dash(&mut self) -> (std::vec_ng::Vec<f64>, f64) {
-    use std::vec_ng::Vec;
+  pub fn get_dash(&mut self) -> (Vec<f64>, f64) {
     unsafe {
       use std::num::Zero;
-      use std::vec::MutableVector;
       let dashes_len = self.get_dash_count() as uint;
       let mut dashes:Vec<f64> = Vec::from_elem(dashes_len, Zero::zero());
       let mut offset:f64 = std::intrinsics::init();
@@ -1081,7 +1081,7 @@ impl Cairo {
   /// Since 1.0
   pub fn append_path(&mut self, path: &path::Path) {
     unsafe {
-      cairo_append_path(self.opaque, path.opaque as *std::libc::c_void);
+      cairo_append_path(self.opaque, path.opaque as *libc::c_void);
     }
   }
 
@@ -1880,120 +1880,120 @@ impl Cairo {
 }
 
 extern {
-  fn cairo_create(surface: *mut std::libc::c_void) -> Cairo;
-  fn cairo_status(self_value: *mut std::libc::c_void) -> Status;
-  fn cairo_save(self_value: *mut std::libc::c_void);
-  fn cairo_restore(self_value: *mut std::libc::c_void);
-  fn cairo_get_target(self_value: *mut std::libc::c_void) -> surface::Surface;
-  fn cairo_push_group(self_value: *mut std::libc::c_void);
-  fn cairo_push_group_with_content(self_value: *mut std::libc::c_void, content: surface::content::Content);
-  fn cairo_pop_group(self_value: *mut std::libc::c_void) -> pattern::Pattern;
-  fn cairo_pop_group_to_source(self_value: *mut std::libc::c_void);
-  fn cairo_get_group_target(self_value: *mut std::libc::c_void) -> surface::Surface;
-  fn cairo_set_source_rgb(self_value: *mut std::libc::c_void, red: f64, green: f64, blue: f64);
-  fn cairo_set_source_rgba(self_value: *mut std::libc::c_void, red: f64, green: f64, blue: f64, alpha: f64);
-  fn cairo_set_source(self_value: *mut std::libc::c_void, source: *mut std::libc::c_void);
-  fn cairo_set_source_surface(self_value: *mut std::libc::c_void, surface: *mut std::libc::c_void, x: f64, y: f64);
-  fn cairo_get_source(self_value: *mut std::libc::c_void) -> pattern::Pattern;
-  fn cairo_set_antialias(self_value: *mut std::libc::c_void, antialias: antialias::Antialias);
-  fn cairo_get_antialias(self_value: *mut std::libc::c_void) -> antialias::Antialias;
-  fn cairo_set_dash(self_value: *mut std::libc::c_void, dashes: *f64, dashes_length: i32, offset: f64);
-  fn cairo_get_dash_count(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_get_dash(self_value: *mut std::libc::c_void, dashes: *mut f64, offset: *mut f64);
-  fn cairo_set_fill_rule(self_value: *mut std::libc::c_void, fill_rule: fill_rule::FillRule);
-  fn cairo_get_fill_rule(self_value: *mut std::libc::c_void) -> fill_rule::FillRule;
-  fn cairo_set_line_cap(self_value: *mut std::libc::c_void, line_cap: line_cap::LineCap);
-  fn cairo_get_line_cap(self_value: *mut std::libc::c_void) -> line_cap::LineCap;
-  fn cairo_set_line_join(self_value: *mut std::libc::c_void, line_join: line_join::LineJoin);
-  fn cairo_get_line_join(self_value: *mut std::libc::c_void) -> line_join::LineJoin;
-  fn cairo_set_line_width(self_value: *mut std::libc::c_void, width: f64);
-  fn cairo_get_line_width(self_value: *mut std::libc::c_void) -> f64;
-  fn cairo_set_miter_limit(self_value: *mut std::libc::c_void, limit: f64);
-  fn cairo_get_miter_limit(self_value: *mut std::libc::c_void) -> f64;
-  fn cairo_set_operator(self_value: *mut std::libc::c_void, operator: operator::Operator);
-  fn cairo_get_operator(self_value: *mut std::libc::c_void) -> operator::Operator;
-  fn cairo_set_tolerance(self_value: *mut std::libc::c_void, tolerance: f64);
-  fn cairo_get_tolerance(self_value: *mut std::libc::c_void) -> f64;
-  fn cairo_clip(self_value: *mut std::libc::c_void);
-  fn cairo_clip_preserve(self_value: *mut std::libc::c_void);
-  fn cairo_clip_extents(self_value: *mut std::libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
-  fn cairo_in_clip(self_value: *mut std::libc::c_void, x: f64, y: f64) -> i32;
-  fn cairo_reset_clip(self_value: *mut std::libc::c_void);
-  fn cairo_fill(self_value: *mut std::libc::c_void);
-  fn cairo_fill_preserve(self_value: *mut std::libc::c_void);
-  fn cairo_fill_extents(self_value: *mut std::libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
-  fn cairo_in_fill(self_value: *mut std::libc::c_void, x: f64, y: f64) -> i32;
-  fn cairo_mask(self_value: *mut std::libc::c_void, pattern: *mut std::libc::c_void);
-  fn cairo_mask_surface(self_value: *mut std::libc::c_void, surface: *mut std::libc::c_void, surface_x: f64, surface_y: f64);
-  fn cairo_paint(self_value: *mut std::libc::c_void);
-  fn cairo_paint_with_alpha(self_value: *mut std::libc::c_void, alpha: f64);
-  fn cairo_stroke(self_value: *mut std::libc::c_void);
-  fn cairo_stroke_preserve(self_value: *mut std::libc::c_void);
-  fn cairo_stroke_extents(self_value: *mut std::libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
-  fn cairo_in_stroke(self_value: *mut std::libc::c_void, x: f64, y: f64) -> i32;
-  fn cairo_copy_page(self_value: *mut std::libc::c_void);
-  fn cairo_show_page(self_value: *mut std::libc::c_void);
-  fn cairo_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_copy_path(self_value: *mut std::libc::c_void) -> path::Path;
-  fn cairo_copy_path_flat(self_value: *mut std::libc::c_void) -> path::Path;
-  fn cairo_append_path(self_value: *mut std::libc::c_void, path: *std::libc::c_void);
-  fn cairo_has_current_point(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_get_current_point(self_value: *mut std::libc::c_void, x: *mut f64, y: *mut f64);
-  fn cairo_new_path(self_value: *mut std::libc::c_void);
-  fn cairo_new_sub_path(self_value: *mut std::libc::c_void);
-  fn cairo_close_path(self_value: *mut std::libc::c_void);
-  fn cairo_arc(self_value: *mut std::libc::c_void, xc: f64, yc: f64, radius: f64, angle1: f64, angle2: f64);
-  fn cairo_arc_negative(self_value: *mut std::libc::c_void, xc: f64, yc: f64, radius: f64, angle1: f64, angle2: f64);
-  fn cairo_curve_to(self_value: *mut std::libc::c_void, x1: f64, y1: f64, x2: f64, y2: f64, x3: f64, y3: f64);
-  fn cairo_line_to(self_value: *mut std::libc::c_void, x: f64, y: f64);
-  fn cairo_move_to(self_value: *mut std::libc::c_void, x: f64, y: f64);
-  fn cairo_rectangle(self_value: *mut std::libc::c_void, x: f64, y: f64, width: f64, height: f64);
-  fn cairo_glyph_path(self_value: *mut std::libc::c_void, glyphs: *font::Glyph, glyphs_length: i32);
-  fn cairo_text_path(self_value: *mut std::libc::c_void, text_path: *std::libc::c_char);
-  fn cairo_rel_curve_to(self_value: *mut std::libc::c_void, dx1: f64, dy1: f64, dx2: f64, dy2: f64, dx3: f64, dy3: f64);
-  fn cairo_rel_line_to(self_value: *mut std::libc::c_void, dx: f64, dy: f64);
-  fn cairo_rel_move_to(self_value: *mut std::libc::c_void, dx: f64, dy: f64);
-  fn cairo_path_extents(self_value: *mut std::libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
-  fn cairo_translate(self_value: *mut std::libc::c_void, tx: f64, ty: f64);
-  fn cairo_scale(self_value: *mut std::libc::c_void, sx: f64, sy: f64);
-  fn cairo_rotate(self_value: *mut std::libc::c_void, angle: f64);
-  fn cairo_transform(self_value: *mut std::libc::c_void, matrix: *matrix::Matrix);
-  fn cairo_set_matrix(self_value: *mut std::libc::c_void, matrix: *matrix::Matrix);
-  fn cairo_get_matrix(self_value: *mut std::libc::c_void, matrix: *mut matrix::Matrix);
-  fn cairo_identity_matrix(self_value: *mut std::libc::c_void);
-  fn cairo_user_to_device(self_value: *mut std::libc::c_void, x: &mut f64, y: &mut f64);
-  fn cairo_user_to_device_distance(self_value: *mut std::libc::c_void, dx: &mut f64, dy: &mut f64);
-  fn cairo_device_to_user(self_value: *mut std::libc::c_void, x: &mut f64, y: &mut f64);
-  fn cairo_device_to_user_distance(self_value: *mut std::libc::c_void, dx: &mut f64, dy: &mut f64);
-  fn cairo_select_font_face(self_value: *mut std::libc::c_void, family: *std::libc::c_char, slant: font::slant::Slant, weight: font::weight::Weight);
-  fn cairo_set_font_size(self_value: *mut std::libc::c_void, size: f64);
-  fn cairo_set_font_matrix(self_value: *mut std::libc::c_void, size: *matrix::Matrix);
-  fn cairo_get_font_matrix(self_value: *mut std::libc::c_void, matrix: *mut matrix::Matrix);
-  fn cairo_set_font_options(self_value: *mut std::libc::c_void, options: font::Options);
-  fn cairo_get_font_options(self_value: *mut std::libc::c_void, options: font::Options);
-  fn cairo_set_font_face(self_value: *mut std::libc::c_void, font_face: font::FontFace);
-  fn cairo_get_font_face(self_value: *mut std::libc::c_void) -> font::FontFace;
-  fn cairo_set_scaled_font(self_value: *mut std::libc::c_void, scaled_font: font::ScaledFont);
-  fn cairo_get_scaled_font(self_value: *mut std::libc::c_void) -> font::ScaledFont;
-  fn cairo_show_text(self_value: *mut std::libc::c_void, utf8: *std::libc::c_char);
-  fn cairo_show_glyphs(self_value: *mut std::libc::c_void, glyphs: *font::Glyph, glyphs_length: i32);
-  fn cairo_show_text_glyphs(self_value: *mut std::libc::c_void, utf8: *std::libc::c_char, utf8_len: i32, glyphs: *font::Glyph, glyphs_length: i32, clusters: *font::Cluster, clusters_length: i32, cluster_flags: font::cluster_flags::ClusterFlags);
-  fn cairo_font_extents(self_value: *mut std::libc::c_void, extents: *mut font::FontExtents);
-  fn cairo_text_extents(self_value: *mut std::libc::c_void, utf8: *std::libc::c_char, extents: *mut font::TextExtents);
-  fn cairo_glyph_extents(self_value: *mut std::libc::c_void, glyphs: *font::Glyph, glyphs_length: i32, extents: *mut font::TextExtents);
+  fn cairo_create(surface: *mut libc::c_void) -> Cairo;
+  fn cairo_status(self_value: *mut libc::c_void) -> Status;
+  fn cairo_save(self_value: *mut libc::c_void);
+  fn cairo_restore(self_value: *mut libc::c_void);
+  fn cairo_get_target(self_value: *mut libc::c_void) -> surface::Surface;
+  fn cairo_push_group(self_value: *mut libc::c_void);
+  fn cairo_push_group_with_content(self_value: *mut libc::c_void, content: surface::content::Content);
+  fn cairo_pop_group(self_value: *mut libc::c_void) -> pattern::Pattern;
+  fn cairo_pop_group_to_source(self_value: *mut libc::c_void);
+  fn cairo_get_group_target(self_value: *mut libc::c_void) -> surface::Surface;
+  fn cairo_set_source_rgb(self_value: *mut libc::c_void, red: f64, green: f64, blue: f64);
+  fn cairo_set_source_rgba(self_value: *mut libc::c_void, red: f64, green: f64, blue: f64, alpha: f64);
+  fn cairo_set_source(self_value: *mut libc::c_void, source: *mut libc::c_void);
+  fn cairo_set_source_surface(self_value: *mut libc::c_void, surface: *mut libc::c_void, x: f64, y: f64);
+  fn cairo_get_source(self_value: *mut libc::c_void) -> pattern::Pattern;
+  fn cairo_set_antialias(self_value: *mut libc::c_void, antialias: antialias::Antialias);
+  fn cairo_get_antialias(self_value: *mut libc::c_void) -> antialias::Antialias;
+  fn cairo_set_dash(self_value: *mut libc::c_void, dashes: *f64, dashes_length: i32, offset: f64);
+  fn cairo_get_dash_count(self_value: *mut libc::c_void) -> i32;
+  fn cairo_get_dash(self_value: *mut libc::c_void, dashes: *mut f64, offset: *mut f64);
+  fn cairo_set_fill_rule(self_value: *mut libc::c_void, fill_rule: fill_rule::FillRule);
+  fn cairo_get_fill_rule(self_value: *mut libc::c_void) -> fill_rule::FillRule;
+  fn cairo_set_line_cap(self_value: *mut libc::c_void, line_cap: line_cap::LineCap);
+  fn cairo_get_line_cap(self_value: *mut libc::c_void) -> line_cap::LineCap;
+  fn cairo_set_line_join(self_value: *mut libc::c_void, line_join: line_join::LineJoin);
+  fn cairo_get_line_join(self_value: *mut libc::c_void) -> line_join::LineJoin;
+  fn cairo_set_line_width(self_value: *mut libc::c_void, width: f64);
+  fn cairo_get_line_width(self_value: *mut libc::c_void) -> f64;
+  fn cairo_set_miter_limit(self_value: *mut libc::c_void, limit: f64);
+  fn cairo_get_miter_limit(self_value: *mut libc::c_void) -> f64;
+  fn cairo_set_operator(self_value: *mut libc::c_void, operator: operator::Operator);
+  fn cairo_get_operator(self_value: *mut libc::c_void) -> operator::Operator;
+  fn cairo_set_tolerance(self_value: *mut libc::c_void, tolerance: f64);
+  fn cairo_get_tolerance(self_value: *mut libc::c_void) -> f64;
+  fn cairo_clip(self_value: *mut libc::c_void);
+  fn cairo_clip_preserve(self_value: *mut libc::c_void);
+  fn cairo_clip_extents(self_value: *mut libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
+  fn cairo_in_clip(self_value: *mut libc::c_void, x: f64, y: f64) -> i32;
+  fn cairo_reset_clip(self_value: *mut libc::c_void);
+  fn cairo_fill(self_value: *mut libc::c_void);
+  fn cairo_fill_preserve(self_value: *mut libc::c_void);
+  fn cairo_fill_extents(self_value: *mut libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
+  fn cairo_in_fill(self_value: *mut libc::c_void, x: f64, y: f64) -> i32;
+  fn cairo_mask(self_value: *mut libc::c_void, pattern: *mut libc::c_void);
+  fn cairo_mask_surface(self_value: *mut libc::c_void, surface: *mut libc::c_void, surface_x: f64, surface_y: f64);
+  fn cairo_paint(self_value: *mut libc::c_void);
+  fn cairo_paint_with_alpha(self_value: *mut libc::c_void, alpha: f64);
+  fn cairo_stroke(self_value: *mut libc::c_void);
+  fn cairo_stroke_preserve(self_value: *mut libc::c_void);
+  fn cairo_stroke_extents(self_value: *mut libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
+  fn cairo_in_stroke(self_value: *mut libc::c_void, x: f64, y: f64) -> i32;
+  fn cairo_copy_page(self_value: *mut libc::c_void);
+  fn cairo_show_page(self_value: *mut libc::c_void);
+  fn cairo_get_reference_count(self_value: *mut libc::c_void) -> i32;
+  fn cairo_copy_path(self_value: *mut libc::c_void) -> path::Path;
+  fn cairo_copy_path_flat(self_value: *mut libc::c_void) -> path::Path;
+  fn cairo_append_path(self_value: *mut libc::c_void, path: *libc::c_void);
+  fn cairo_has_current_point(self_value: *mut libc::c_void) -> i32;
+  fn cairo_get_current_point(self_value: *mut libc::c_void, x: *mut f64, y: *mut f64);
+  fn cairo_new_path(self_value: *mut libc::c_void);
+  fn cairo_new_sub_path(self_value: *mut libc::c_void);
+  fn cairo_close_path(self_value: *mut libc::c_void);
+  fn cairo_arc(self_value: *mut libc::c_void, xc: f64, yc: f64, radius: f64, angle1: f64, angle2: f64);
+  fn cairo_arc_negative(self_value: *mut libc::c_void, xc: f64, yc: f64, radius: f64, angle1: f64, angle2: f64);
+  fn cairo_curve_to(self_value: *mut libc::c_void, x1: f64, y1: f64, x2: f64, y2: f64, x3: f64, y3: f64);
+  fn cairo_line_to(self_value: *mut libc::c_void, x: f64, y: f64);
+  fn cairo_move_to(self_value: *mut libc::c_void, x: f64, y: f64);
+  fn cairo_rectangle(self_value: *mut libc::c_void, x: f64, y: f64, width: f64, height: f64);
+  fn cairo_glyph_path(self_value: *mut libc::c_void, glyphs: *font::Glyph, glyphs_length: i32);
+  fn cairo_text_path(self_value: *mut libc::c_void, text_path: *libc::c_char);
+  fn cairo_rel_curve_to(self_value: *mut libc::c_void, dx1: f64, dy1: f64, dx2: f64, dy2: f64, dx3: f64, dy3: f64);
+  fn cairo_rel_line_to(self_value: *mut libc::c_void, dx: f64, dy: f64);
+  fn cairo_rel_move_to(self_value: *mut libc::c_void, dx: f64, dy: f64);
+  fn cairo_path_extents(self_value: *mut libc::c_void, x1: *mut f64, y1: *mut f64, x2: *mut f64, y2: *mut f64);
+  fn cairo_translate(self_value: *mut libc::c_void, tx: f64, ty: f64);
+  fn cairo_scale(self_value: *mut libc::c_void, sx: f64, sy: f64);
+  fn cairo_rotate(self_value: *mut libc::c_void, angle: f64);
+  fn cairo_transform(self_value: *mut libc::c_void, matrix: *matrix::Matrix);
+  fn cairo_set_matrix(self_value: *mut libc::c_void, matrix: *matrix::Matrix);
+  fn cairo_get_matrix(self_value: *mut libc::c_void, matrix: *mut matrix::Matrix);
+  fn cairo_identity_matrix(self_value: *mut libc::c_void);
+  fn cairo_user_to_device(self_value: *mut libc::c_void, x: &mut f64, y: &mut f64);
+  fn cairo_user_to_device_distance(self_value: *mut libc::c_void, dx: &mut f64, dy: &mut f64);
+  fn cairo_device_to_user(self_value: *mut libc::c_void, x: &mut f64, y: &mut f64);
+  fn cairo_device_to_user_distance(self_value: *mut libc::c_void, dx: &mut f64, dy: &mut f64);
+  fn cairo_select_font_face(self_value: *mut libc::c_void, family: *libc::c_char, slant: font::slant::Slant, weight: font::weight::Weight);
+  fn cairo_set_font_size(self_value: *mut libc::c_void, size: f64);
+  fn cairo_set_font_matrix(self_value: *mut libc::c_void, size: *matrix::Matrix);
+  fn cairo_get_font_matrix(self_value: *mut libc::c_void, matrix: *mut matrix::Matrix);
+  fn cairo_set_font_options(self_value: *mut libc::c_void, options: font::Options);
+  fn cairo_get_font_options(self_value: *mut libc::c_void, options: font::Options);
+  fn cairo_set_font_face(self_value: *mut libc::c_void, font_face: font::FontFace);
+  fn cairo_get_font_face(self_value: *mut libc::c_void) -> font::FontFace;
+  fn cairo_set_scaled_font(self_value: *mut libc::c_void, scaled_font: font::ScaledFont);
+  fn cairo_get_scaled_font(self_value: *mut libc::c_void) -> font::ScaledFont;
+  fn cairo_show_text(self_value: *mut libc::c_void, utf8: *libc::c_char);
+  fn cairo_show_glyphs(self_value: *mut libc::c_void, glyphs: *font::Glyph, glyphs_length: i32);
+  fn cairo_show_text_glyphs(self_value: *mut libc::c_void, utf8: *libc::c_char, utf8_len: i32, glyphs: *font::Glyph, glyphs_length: i32, clusters: *font::Cluster, clusters_length: i32, cluster_flags: font::cluster_flags::ClusterFlags);
+  fn cairo_font_extents(self_value: *mut libc::c_void, extents: *mut font::FontExtents);
+  fn cairo_text_extents(self_value: *mut libc::c_void, utf8: *libc::c_char, extents: *mut font::TextExtents);
+  fn cairo_glyph_extents(self_value: *mut libc::c_void, glyphs: *font::Glyph, glyphs_length: i32, extents: *mut font::TextExtents);
 }
 
 impl std::clone::Clone for Cairo {
   fn clone(&self) -> Cairo {
     unsafe {
-      let foreign_result = cairo_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_reference(self_value: *std::libc::c_void) -> Cairo;
+  fn cairo_reference(self_value: *libc::c_void) -> Cairo;
 }
 
 impl std::ops::Drop for Cairo {
@@ -2005,7 +2005,7 @@ impl std::ops::Drop for Cairo {
 }
 
 extern {
-  fn cairo_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_destroy(self_value: *mut libc::c_void);
 }
 
 pub mod antialias;

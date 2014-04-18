@@ -1,6 +1,7 @@
 //! Creating paths and manipulating path data
 
 use std;
+use libc;
 
 ///  A data structure for holding a path. This data structure serves as the return value for cairo_copy_path() and cairo_copy_path_flat() as well the input value for cairo_append_path().
 ///
@@ -17,7 +18,7 @@ use std;
 /// Since 1.0
 pub struct Path {
   /// Wraps Cairo pointer for path.
-  opaque: *mut std::libc::c_void
+  pub opaque: *mut libc::c_void
 }
 
 impl std::ops::Drop for Path {
@@ -29,6 +30,6 @@ impl std::ops::Drop for Path {
 }
 
 extern {
-  fn cairo_path_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_path_destroy(self_value: *mut libc::c_void);
 }
 

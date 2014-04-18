@@ -1,11 +1,13 @@
 //! Rendering to surfaces
 
 use std;
+use libc;
 
 /// surface::SVGVersion is used to describe the version number of the SVG specification that a generated SVG file will conform to.
 ///
 /// Since 1.2
 #[repr(i32)]
+#[allow(non_camel_case_types)]
 pub enum SVGVersion {
   ///The version 1.1 of the SVG specification. (Since 1.2)
   SVGVersion_1_1 = 0,
@@ -46,7 +48,7 @@ pub enum SVGVersion {
 /// Note that for other surface types it might be necessary to acquire the surface's device first. See cairo_device_acquire() for a discussion of devices. 
 pub struct Surface {
   /// Wraps the Cairo pointer to surface.
-  opaque: *mut std::libc::c_void
+  pub opaque: *mut libc::c_void
 }
 
 ///  A surface::Device represents the driver interface for drawing operations to a surface::Surface. There are different subtypes of surface::Device for different drawing backends; for example, cairo_egl_device_create() creates a device that wraps an EGL display and context.
@@ -58,7 +60,7 @@ pub struct Surface {
 /// Since 1.10
 pub struct Device {
   /// Wraps the Cairo pointer to device.
-  opaque: *mut std::libc::c_void
+  opaque: *mut libc::c_void
 }
 
 impl Device {
@@ -167,26 +169,26 @@ impl Device {
 }
 
 extern {
-  fn cairo_device_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_device_finish(self_value: *mut std::libc::c_void);
-  fn cairo_device_flush(self_value: *mut std::libc::c_void);
-  fn cairo_device_get_type(self_value: *mut std::libc::c_void) -> device_type::DeviceType;
-  fn cairo_device_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_device_acquire(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_device_release(self_value: *mut std::libc::c_void);
+  fn cairo_device_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_device_finish(self_value: *mut libc::c_void);
+  fn cairo_device_flush(self_value: *mut libc::c_void);
+  fn cairo_device_get_type(self_value: *mut libc::c_void) -> device_type::DeviceType;
+  fn cairo_device_get_reference_count(self_value: *mut libc::c_void) -> i32;
+  fn cairo_device_acquire(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_device_release(self_value: *mut libc::c_void);
 }
 
 impl std::clone::Clone for Device {
   fn clone(&self) -> Device {
     unsafe {
-      let foreign_result = cairo_device_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_device_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_device_reference(self_value: *std::libc::c_void) -> Device;
+  fn cairo_device_reference(self_value: *libc::c_void) -> Device;
 }
 
 impl std::ops::Drop for Device {
@@ -198,7 +200,7 @@ impl std::ops::Drop for Device {
 }
 
 extern {
-  fn cairo_device_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_device_destroy(self_value: *mut libc::c_void);
 }
 
 impl Surface {
@@ -661,30 +663,30 @@ impl Surface {
 extern {
   fn cairo_surface_create_similar_image(format: format::Format, width: i32, height: i32) -> Surface;
   fn cairo_surface_create_for_rectangle(x: f64, y: f64, width: f64, height: f64) -> Surface;
-  fn cairo_surface_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_surface_finish(self_value: *mut std::libc::c_void);
-  fn cairo_surface_flush(self_value: *mut std::libc::c_void);
-  fn cairo_surface_get_device(self_value: *mut std::libc::c_void) -> Device;
-  fn cairo_surface_get_font_options(self_value: *mut std::libc::c_void, options: *mut std::libc::c_void);
-  fn cairo_surface_get_content(self_value: *mut std::libc::c_void) -> content::Content;
-  fn cairo_surface_mark_dirty(self_value: *mut std::libc::c_void);
-  fn cairo_surface_mark_dirty_rectangle(self_value: *mut std::libc::c_void, x: f64, y: f64, width: f64, height: f64);
-  fn cairo_surface_set_device_offset(self_value: *mut std::libc::c_void, x_offset: f64, y_offset: f64);
-  fn cairo_surface_get_device_offset(self_value: *mut std::libc::c_void, x_offset: *mut f64, y_offset: *mut f64);
-  fn cairo_surface_set_fallback_resolution(self_value: *mut std::libc::c_void, x_pixels_per_inch: f64, y_pixels_per_inch: f64);
-  fn cairo_surface_get_fallback_resolution(self_value: *mut std::libc::c_void, x_pixels_per_inch: *mut f64, y_pixels_per_inch: *mut f64);
-  fn cairo_surface_get_type(self_value: *mut std::libc::c_void) -> surface_type::SurfaceType;
-  fn cairo_surface_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_surface_copy_page(self_value: *mut std::libc::c_void);
-  fn cairo_surface_show_page(self_value: *mut std::libc::c_void);
+  fn cairo_surface_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_surface_finish(self_value: *mut libc::c_void);
+  fn cairo_surface_flush(self_value: *mut libc::c_void);
+  fn cairo_surface_get_device(self_value: *mut libc::c_void) -> Device;
+  fn cairo_surface_get_font_options(self_value: *mut libc::c_void, options: *mut libc::c_void);
+  fn cairo_surface_get_content(self_value: *mut libc::c_void) -> content::Content;
+  fn cairo_surface_mark_dirty(self_value: *mut libc::c_void);
+  fn cairo_surface_mark_dirty_rectangle(self_value: *mut libc::c_void, x: f64, y: f64, width: f64, height: f64);
+  fn cairo_surface_set_device_offset(self_value: *mut libc::c_void, x_offset: f64, y_offset: f64);
+  fn cairo_surface_get_device_offset(self_value: *mut libc::c_void, x_offset: *mut f64, y_offset: *mut f64);
+  fn cairo_surface_set_fallback_resolution(self_value: *mut libc::c_void, x_pixels_per_inch: f64, y_pixels_per_inch: f64);
+  fn cairo_surface_get_fallback_resolution(self_value: *mut libc::c_void, x_pixels_per_inch: *mut f64, y_pixels_per_inch: *mut f64);
+  fn cairo_surface_get_type(self_value: *mut libc::c_void) -> surface_type::SurfaceType;
+  fn cairo_surface_get_reference_count(self_value: *mut libc::c_void) -> i32;
+  fn cairo_surface_copy_page(self_value: *mut libc::c_void);
+  fn cairo_surface_show_page(self_value: *mut libc::c_void);
   fn cairo_image_surface_create(format: format::Format, width: i32, height: i32) -> Surface;
-  fn cairo_image_surface_get_format(self_value: *mut std::libc::c_void) -> format::Format;
-  fn cairo_image_surface_get_width(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_image_surface_get_height(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_image_surface_get_stride(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_image_surface_create_from_png(filename: *std::libc::c_char) -> Surface;
-  fn cairo_surface_write_to_png(self_value: *mut std::libc::c_void, filename: *std::libc::c_char) -> super::Status;
-  fn cairo_svg_surface_create(filename: *std::libc::c_char, width: f64, height: f64) -> Surface;
+  fn cairo_image_surface_get_format(self_value: *mut libc::c_void) -> format::Format;
+  fn cairo_image_surface_get_width(self_value: *mut libc::c_void) -> i32;
+  fn cairo_image_surface_get_height(self_value: *mut libc::c_void) -> i32;
+  fn cairo_image_surface_get_stride(self_value: *mut libc::c_void) -> i32;
+  fn cairo_image_surface_create_from_png(filename: *libc::c_char) -> Surface;
+  fn cairo_surface_write_to_png(self_value: *mut libc::c_void, filename: *libc::c_char) -> super::Status;
+  fn cairo_svg_surface_create(filename: *libc::c_char, width: f64, height: f64) -> Surface;
   fn cairo_svg_surface_restrict_to_version(self_value: *mut Surface, version: SVGVersion);
   fn cairo_svg_version_to_string(version: SVGVersion) -> *i8;
 }
@@ -692,14 +694,14 @@ extern {
 impl std::clone::Clone for Surface {
   fn clone(&self) -> Surface {
     unsafe {
-      let foreign_result = cairo_surface_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_surface_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_surface_reference(self_value: *std::libc::c_void) -> Surface;
+  fn cairo_surface_reference(self_value: *libc::c_void) -> Surface;
 }
 
 impl std::ops::Drop for Surface {
@@ -711,7 +713,7 @@ impl std::ops::Drop for Surface {
 }
 
 extern {
-  fn cairo_surface_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_surface_destroy(self_value: *mut libc::c_void);
 }
 
 pub mod content;

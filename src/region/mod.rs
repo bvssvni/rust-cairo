@@ -2,6 +2,7 @@
 
 use std;
 use super::DeepClone;
+use libc;
 
 /// A region::Region represents a set of integer-aligned rectangles.
 /// 
@@ -12,7 +13,7 @@ use super::DeepClone;
 /// Since 1.10
 pub struct Region {
   /// Wraps Cairo pointer for region.
-  opaque: *mut std::libc::c_void
+  opaque: *mut libc::c_void
 }
 
 /// A data structure for holding a rectangle with integer coordinates.
@@ -191,7 +192,7 @@ impl Region {
   /// Since 1.10
   pub fn equal(&mut self, other: &Region) -> bool {
     unsafe {
-      let foreign_result = cairo_region_equal(self.opaque, other.opaque as *std::libc::c_void);
+      let foreign_result = cairo_region_equal(self.opaque, other.opaque as *libc::c_void);
       return foreign_result != 0;
     }
   }
@@ -328,48 +329,48 @@ extern {
   fn cairo_region_create() -> Region;
   fn cairo_region_create_rectangle(rectangle: *Rectangle) -> Region;
   fn cairo_region_create_rectangles(rectangles: *Rectangle, rectangles_length: i32) -> Region;
-  fn cairo_region_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_region_get_extents(self_value: *mut std::libc::c_void, extents: *mut Rectangle);
-  fn cairo_region_num_rectangles(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_region_get_rectangle(self_value: *mut std::libc::c_void, nth: i32, rectangle: *mut Rectangle);
-  fn cairo_region_is_empty(self_value: *mut std::libc::c_void) -> i32;
-  fn cairo_region_contains_point(self_value: *mut std::libc::c_void, x: i32, y: i32) -> i32;
-  fn cairo_region_contains_rectangle(self_value: *mut std::libc::c_void, rectangle: *Rectangle) -> overlap::Overlap;
-  fn cairo_region_equal(self_value: *mut std::libc::c_void, other: *std::libc::c_void) -> i32;
-  fn cairo_region_translate(self_value: *mut std::libc::c_void, dx: i32, dy: i32);
-  fn cairo_region_intersect_rectangle(self_value: *mut std::libc::c_void, rectangle: *Rectangle) -> super::Status;
-  fn cairo_region_subtract(self_value: *mut std::libc::c_void, region: *Region) -> super::Status;
-  fn cairo_region_subtract_rectangle(self_value: *mut std::libc::c_void, rectangle: *Rectangle) -> super::Status;
-  fn cairo_region_union(self_value: *mut std::libc::c_void, region: *Region) -> super::Status;
-  fn cairo_region_union_rectangle(self_value: *mut std::libc::c_void, rectangle: *Rectangle) -> super::Status;
-  fn cairo_region_xor(self_value: *mut std::libc::c_void, region: *Region) -> super::Status;
-  fn cairo_region_xor_rectangle(self_value: *mut std::libc::c_void, rectangle: *Rectangle) -> super::Status;
+  fn cairo_region_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_region_get_extents(self_value: *mut libc::c_void, extents: *mut Rectangle);
+  fn cairo_region_num_rectangles(self_value: *mut libc::c_void) -> i32;
+  fn cairo_region_get_rectangle(self_value: *mut libc::c_void, nth: i32, rectangle: *mut Rectangle);
+  fn cairo_region_is_empty(self_value: *mut libc::c_void) -> i32;
+  fn cairo_region_contains_point(self_value: *mut libc::c_void, x: i32, y: i32) -> i32;
+  fn cairo_region_contains_rectangle(self_value: *mut libc::c_void, rectangle: *Rectangle) -> overlap::Overlap;
+  fn cairo_region_equal(self_value: *mut libc::c_void, other: *libc::c_void) -> i32;
+  fn cairo_region_translate(self_value: *mut libc::c_void, dx: i32, dy: i32);
+  fn cairo_region_intersect_rectangle(self_value: *mut libc::c_void, rectangle: *Rectangle) -> super::Status;
+  fn cairo_region_subtract(self_value: *mut libc::c_void, region: *Region) -> super::Status;
+  fn cairo_region_subtract_rectangle(self_value: *mut libc::c_void, rectangle: *Rectangle) -> super::Status;
+  fn cairo_region_union(self_value: *mut libc::c_void, region: *Region) -> super::Status;
+  fn cairo_region_union_rectangle(self_value: *mut libc::c_void, rectangle: *Rectangle) -> super::Status;
+  fn cairo_region_xor(self_value: *mut libc::c_void, region: *Region) -> super::Status;
+  fn cairo_region_xor_rectangle(self_value: *mut libc::c_void, rectangle: *Rectangle) -> super::Status;
 }
 
 impl std::clone::Clone for Region {
   fn clone(&self) -> Region {
     unsafe {
-      let foreign_result = cairo_region_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_region_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_region_reference(self_value: *std::libc::c_void) -> Region;
+  fn cairo_region_reference(self_value: *libc::c_void) -> Region;
 }
 
 impl DeepClone for Region {
   fn deep_clone(&self) -> Region {
     unsafe {
-      let foreign_result = cairo_region_copy(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_region_copy(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_region_copy(self_value: *std::libc::c_void) -> Region;
+  fn cairo_region_copy(self_value: *libc::c_void) -> Region;
 }
 
 impl std::ops::Drop for Region {
@@ -381,7 +382,7 @@ impl std::ops::Drop for Region {
 }
 
 extern {
-  fn cairo_region_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_region_destroy(self_value: *mut libc::c_void);
 }
 
 pub mod overlap;

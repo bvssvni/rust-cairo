@@ -1,6 +1,7 @@
 //! Sources for drawing
 
 use std;
+use libc;
 
 /// A pattern::Pattern represents a source when drawing onto a surface. There are different subtypes of pattern::Pattern, for different types of sources; for example, cairo_pattern_create_rgb() creates a pattern for a solid opaque color.
 ///
@@ -13,7 +14,7 @@ use std;
 /// Since 1.0
 pub struct Pattern {
   /// Wraps Cairo pointer of pattern.
-  opaque: *mut std::libc::c_void
+  pub opaque: *mut libc::c_void
 }
 
 impl Pattern {
@@ -837,54 +838,54 @@ impl Pattern {
 }
 
 extern {
-  fn cairo_pattern_add_color_stop_rgb(self_value: *mut std::libc::c_void, offset: f64, red: f64, green: f64, blue: f64);
-  fn cairo_pattern_add_color_stop_rgba(self_value: *mut std::libc::c_void, offset: f64, red: f64, green: f64, blue: f64, alpha: f64);
-  fn cairo_pattern_get_color_stop_count(self_value: *mut std::libc::c_void, stop_count: *mut i32) -> super::Status;
-  fn cairo_pattern_get_color_stop_rgba(self_value: *mut std::libc::c_void, stop_count: i32, offset: *mut f64, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
+  fn cairo_pattern_add_color_stop_rgb(self_value: *mut libc::c_void, offset: f64, red: f64, green: f64, blue: f64);
+  fn cairo_pattern_add_color_stop_rgba(self_value: *mut libc::c_void, offset: f64, red: f64, green: f64, blue: f64, alpha: f64);
+  fn cairo_pattern_get_color_stop_count(self_value: *mut libc::c_void, stop_count: *mut i32) -> super::Status;
+  fn cairo_pattern_get_color_stop_rgba(self_value: *mut libc::c_void, stop_count: i32, offset: *mut f64, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
   fn cairo_pattern_create_rgb(red: f64, green: f64, blue: f64) -> Pattern;
   fn cairo_pattern_create_rgba(red: f64, green: f64, blue: f64, alpha: f64) -> Pattern;
-  fn cairo_pattern_get_rgba(self_value: *mut std::libc::c_void, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
+  fn cairo_pattern_get_rgba(self_value: *mut libc::c_void, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
   fn cairo_pattern_create_for_surface(surface: super::surface::Surface) -> Pattern;
-  fn cairo_pattern_get_surface(self_value: *mut std::libc::c_void, surface: *mut super::surface::Surface) -> super::Status;
+  fn cairo_pattern_get_surface(self_value: *mut libc::c_void, surface: *mut super::surface::Surface) -> super::Status;
   fn cairo_pattern_create_linear(x0: f64, y0: f64, x1: f64, y1: f64) -> Pattern;
-  fn cairo_pattern_get_linear_points(self_value: *mut std::libc::c_void, x0: *mut f64, y0: *mut f64, x1: *mut f64, y1: *mut f64) -> super::Status;
+  fn cairo_pattern_get_linear_points(self_value: *mut libc::c_void, x0: *mut f64, y0: *mut f64, x1: *mut f64, y1: *mut f64) -> super::Status;
   fn cairo_pattern_create_radial(cx0: f64, cy0: f64, radius0: f64, cx1: f64, cy1: f64, radius1: f64) -> Pattern;
-  fn cairo_pattern_get_radial_circles(self_value: *mut std::libc::c_void, x0: *mut f64, y0: *mut f64, r0: *mut f64, x1: *mut f64, y1: *mut f64, r1: *mut f64) -> super::Status;
+  fn cairo_pattern_get_radial_circles(self_value: *mut libc::c_void, x0: *mut f64, y0: *mut f64, r0: *mut f64, x1: *mut f64, y1: *mut f64, r1: *mut f64) -> super::Status;
   fn cairo_pattern_create_mesh() -> Pattern;
-  fn cairo_mesh_pattern_begin_patch(self_value: *mut std::libc::c_void);
-  fn cairo_mesh_pattern_end_patch(self_value: *mut std::libc::c_void);
-  fn cairo_mesh_pattern_move_to(self_value: *mut std::libc::c_void, x: f64, y: f64);
-  fn cairo_mesh_pattern_line_to(self_value: *mut std::libc::c_void, x: f64, y: f64);
-  fn cairo_mesh_pattern_curve_to(self_value: *mut std::libc::c_void, x1: f64, y1: f64, x2: f64, y2: f64, x3: f64, y3: f64);
-  fn cairo_mesh_pattern_set_control_point(self_value: *mut std::libc::c_void, point_num: i32, x: f64, y: f64);
-  fn cairo_mesh_pattern_set_corner_color_rgb(self_value: *mut std::libc::c_void, corner_num: i32, red: f64, green: f64, blue: f64);
-  fn cairo_mesh_pattern_set_corner_color_rgba(self_value: *mut std::libc::c_void, corner_num: i32, red: f64, green: f64, blue: f64, alpha: f64);
-  fn cairo_mesh_pattern_get_patch_count(self_value: *mut std::libc::c_void, count: *mut i32) -> super::Status;
-  fn cairo_mesh_pattern_get_path(self_value: *mut std::libc::c_void, patch_num: i32) -> super::path::Path;
-  fn cairo_mesh_pattern_get_control_point(self_value: *mut std::libc::c_void, patch_num: i32, pointer_num: i32, x: *mut f64, y: *mut f64) -> super::Status;
-  fn cairo_mesh_pattern_get_corner_color_rgba(self_value: *mut std::libc::c_void, patch_num: i32, pointer_num: i32, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
-  fn cairo_pattern_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_pattern_set_extend(self_value: *mut std::libc::c_void, extend: extend::Extend);
-  fn cairo_pattern_get_extend(self_value: *mut std::libc::c_void) -> extend::Extend;
-  fn cairo_pattern_set_filter(self_value: *mut std::libc::c_void, filter: filter::Filter);
-  fn cairo_pattern_get_filter(self_value: *mut std::libc::c_void) -> filter::Filter;
-  fn cairo_pattern_set_matrix(self_value: *mut std::libc::c_void, matrix: super::matrix::Matrix);
-  fn cairo_pattern_get_matrix(self_value: *mut std::libc::c_void) -> super::matrix::Matrix;
-  fn cairo_pattern_get_type(self_value: *mut std::libc::c_void) -> pattern_type::PatternType;
-  fn cairo_pattern_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
+  fn cairo_mesh_pattern_begin_patch(self_value: *mut libc::c_void);
+  fn cairo_mesh_pattern_end_patch(self_value: *mut libc::c_void);
+  fn cairo_mesh_pattern_move_to(self_value: *mut libc::c_void, x: f64, y: f64);
+  fn cairo_mesh_pattern_line_to(self_value: *mut libc::c_void, x: f64, y: f64);
+  fn cairo_mesh_pattern_curve_to(self_value: *mut libc::c_void, x1: f64, y1: f64, x2: f64, y2: f64, x3: f64, y3: f64);
+  fn cairo_mesh_pattern_set_control_point(self_value: *mut libc::c_void, point_num: i32, x: f64, y: f64);
+  fn cairo_mesh_pattern_set_corner_color_rgb(self_value: *mut libc::c_void, corner_num: i32, red: f64, green: f64, blue: f64);
+  fn cairo_mesh_pattern_set_corner_color_rgba(self_value: *mut libc::c_void, corner_num: i32, red: f64, green: f64, blue: f64, alpha: f64);
+  fn cairo_mesh_pattern_get_patch_count(self_value: *mut libc::c_void, count: *mut i32) -> super::Status;
+  fn cairo_mesh_pattern_get_path(self_value: *mut libc::c_void, patch_num: i32) -> super::path::Path;
+  fn cairo_mesh_pattern_get_control_point(self_value: *mut libc::c_void, patch_num: i32, pointer_num: i32, x: *mut f64, y: *mut f64) -> super::Status;
+  fn cairo_mesh_pattern_get_corner_color_rgba(self_value: *mut libc::c_void, patch_num: i32, pointer_num: i32, red: *mut f64, green: *mut f64, blue: *mut f64, alpha: *mut f64) -> super::Status;
+  fn cairo_pattern_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_pattern_set_extend(self_value: *mut libc::c_void, extend: extend::Extend);
+  fn cairo_pattern_get_extend(self_value: *mut libc::c_void) -> extend::Extend;
+  fn cairo_pattern_set_filter(self_value: *mut libc::c_void, filter: filter::Filter);
+  fn cairo_pattern_get_filter(self_value: *mut libc::c_void) -> filter::Filter;
+  fn cairo_pattern_set_matrix(self_value: *mut libc::c_void, matrix: super::matrix::Matrix);
+  fn cairo_pattern_get_matrix(self_value: *mut libc::c_void) -> super::matrix::Matrix;
+  fn cairo_pattern_get_type(self_value: *mut libc::c_void) -> pattern_type::PatternType;
+  fn cairo_pattern_get_reference_count(self_value: *mut libc::c_void) -> i32;
 }
 
 impl std::clone::Clone for Pattern {
   fn clone(&self) -> Pattern {
     unsafe {
-      let foreign_result = cairo_pattern_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_pattern_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_pattern_reference(self_value: *std::libc::c_void) -> Pattern;
+  fn cairo_pattern_reference(self_value: *libc::c_void) -> Pattern;
 }
 
 impl std::ops::Drop for Pattern {
@@ -896,7 +897,7 @@ impl std::ops::Drop for Pattern {
 }
 
 extern {
-  fn cairo_pattern_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_pattern_destroy(self_value: *mut libc::c_void);
 }
 
 pub mod extend;

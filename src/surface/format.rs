@@ -6,6 +6,7 @@
 /// 
 /// Since 1.0
 #[repr(i32)]
+#[allow(non_camel_case_types)]
 pub enum Format {
   /// no such format exists or is supported.
   Invalid = -1,

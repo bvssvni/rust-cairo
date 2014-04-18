@@ -2,6 +2,7 @@
 
 use std;
 use super::DeepClone;
+use libc;
 
 /// An opaque structure holding all options that are used when rendering fonts.
 /// 
@@ -12,7 +13,7 @@ use super::DeepClone;
 /// Since 1.0
 pub struct Options {
   /// Wraps the Cairo pointer for font options.
-  opaque: *mut std::libc::c_void
+  pub opaque: *mut libc::c_void
 }
 
 /// A font::FontFace specifies all aspects of a font other than the size or font matrix (a font matrix is used to distort a font by sheering it or scaling it unequally in the two directions) . A font face can be set on a Cairo by using cairo_set_font_face(); the size and font matrix are set with cairo_set_font_size() and cairo_set_font_matrix().
@@ -24,7 +25,7 @@ pub struct Options {
 /// Since 1.0
 pub struct FontFace {
   /// Wraps the Cairo pointer for font face.
-  opaque: *mut std::libc::c_void
+  opaque: *mut libc::c_void
 }
 
 /// A font::ScaledFont is a font scaled to a particular size and device resolution. A font::ScaledFont is most useful for low-level font usage where a library or application wants to cache a reference to a scaled font to speed up the computation of metrics.
@@ -36,7 +37,7 @@ pub struct FontFace {
 /// Since 1.0
 pub struct ScaledFont {
   /// Wraps the Cairo pointer for scaled font.
-  opaque: *mut std::libc::c_void
+  opaque: *mut libc::c_void
 }
 
 /// The font::Glyph structure holds information about a single glyph when drawing or measuring text. A font is (in simple terms) a collection of shapes used to draw text. A glyph is one of these shapes. There can be multiple glyphs for a single character (alternates to be used in different contexts, for example), or a glyph can be a ligature of multiple characters. Cairo doesn't expose any way of converting input text into glyphs, so in order to use the Cairo interfaces that take arrays of glyphs, you must directly access the appropriate underlying font system.
@@ -168,7 +169,7 @@ impl Options {
   /// Since 1.0
   pub fn equal(&mut self, other: &Options) -> bool {
     unsafe {
-      let foreign_result = cairo_font_options_equal(self.opaque, other.opaque as *std::libc::c_void);
+      let foreign_result = cairo_font_options_equal(self.opaque, other.opaque as *libc::c_void);
       return foreign_result != 0;
     }
   }
@@ -284,37 +285,37 @@ impl Options {
 
 extern {
   fn cairo_font_options_create() -> Options;
-  fn cairo_font_options_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_font_options_merge(self_value: *mut std::libc::c_void, other: *Options);
-  fn cairo_font_options_hash(self_value: *mut std::libc::c_void) -> i64;
-  fn cairo_font_options_equal(self_value: *mut std::libc::c_void, other: *std::libc::c_void) -> i32;
-  fn cairo_font_options_set_antialias(self_value: *mut std::libc::c_void, antialias: super::antialias::Antialias);
-  fn cairo_font_options_get_antialias(self_value: *mut std::libc::c_void) -> super::antialias::Antialias;
-  fn cairo_font_options_set_subpixel_order(self_value: *mut std::libc::c_void, subpixel_order: subpixel_order::SubpixelOrder);
-  fn cairo_font_options_get_subpixel_order(self_value: *mut std::libc::c_void) -> subpixel_order::SubpixelOrder;
-  fn cairo_font_options_set_hint_style(self_value: *mut std::libc::c_void, hint_style: hint_style::HintStyle);
-  fn cairo_font_options_get_hint_style(self_value: *mut std::libc::c_void) -> hint_style::HintStyle;
-  fn cairo_font_options_set_hint_metrics(self_value: *mut std::libc::c_void, hint_metrics: hint_metrics::HintMetrics);
- fn cairo_font_options_get_hint_metrics(self_value: *mut std::libc::c_void) -> hint_metrics::HintMetrics;
+  fn cairo_font_options_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_font_options_merge(self_value: *mut libc::c_void, other: *Options);
+  fn cairo_font_options_hash(self_value: *mut libc::c_void) -> i64;
+  fn cairo_font_options_equal(self_value: *mut libc::c_void, other: *libc::c_void) -> i32;
+  fn cairo_font_options_set_antialias(self_value: *mut libc::c_void, antialias: super::antialias::Antialias);
+  fn cairo_font_options_get_antialias(self_value: *mut libc::c_void) -> super::antialias::Antialias;
+  fn cairo_font_options_set_subpixel_order(self_value: *mut libc::c_void, subpixel_order: subpixel_order::SubpixelOrder);
+  fn cairo_font_options_get_subpixel_order(self_value: *mut libc::c_void) -> subpixel_order::SubpixelOrder;
+  fn cairo_font_options_set_hint_style(self_value: *mut libc::c_void, hint_style: hint_style::HintStyle);
+  fn cairo_font_options_get_hint_style(self_value: *mut libc::c_void) -> hint_style::HintStyle;
+  fn cairo_font_options_set_hint_metrics(self_value: *mut libc::c_void, hint_metrics: hint_metrics::HintMetrics);
+ fn cairo_font_options_get_hint_metrics(self_value: *mut libc::c_void) -> hint_metrics::HintMetrics;
 }
 
 impl std::clone::Clone for Options {
   fn clone(&self) -> Options {
     unsafe {
-      let foreign_result = cairo_font_options_copy(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_font_options_copy(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_font_options_copy(self_value: *std::libc::c_void) -> Options;
+  fn cairo_font_options_copy(self_value: *libc::c_void) -> Options;
 }
 
 impl DeepClone for Options {
   fn deep_clone(&self) -> Options {
     unsafe {
-      let foreign_result = cairo_font_options_copy(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_font_options_copy(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
@@ -329,7 +330,7 @@ impl std::ops::Drop for Options {
 }
 
 extern {
-  fn cairo_font_options_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_font_options_destroy(self_value: *mut libc::c_void);
 }
 
 impl FontFace {
@@ -442,26 +443,26 @@ impl FontFace {
 }
 
 extern {
-  fn cairo_toy_font_face_create(family: *std::libc::c_char, slant: slant::Slant, weight: weight::Weight) -> FontFace;
-  fn cairo_toy_font_face_get_family(self_value: *mut std::libc::c_void) -> *i8;
-  fn cairo_toy_font_face_get_slant(self_value: *mut std::libc::c_void) -> slant::Slant;
-  fn cairo_toy_font_face_get_weight(self_value: *mut std::libc::c_void) -> slant::Slant;
-  fn cairo_font_face_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_font_face_get_type(self_value: *mut std::libc::c_void) -> font_type::FontType;
-  fn cairo_font_face_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
+  fn cairo_toy_font_face_create(family: *libc::c_char, slant: slant::Slant, weight: weight::Weight) -> FontFace;
+  fn cairo_toy_font_face_get_family(self_value: *mut libc::c_void) -> *i8;
+  fn cairo_toy_font_face_get_slant(self_value: *mut libc::c_void) -> slant::Slant;
+  fn cairo_toy_font_face_get_weight(self_value: *mut libc::c_void) -> slant::Slant;
+  fn cairo_font_face_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_font_face_get_type(self_value: *mut libc::c_void) -> font_type::FontType;
+  fn cairo_font_face_get_reference_count(self_value: *mut libc::c_void) -> i32;
 }
 
 impl std::clone::Clone for FontFace {
   fn clone(&self) -> FontFace {
     unsafe {
-      let foreign_result = cairo_font_face_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_font_face_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_font_face_reference(self_value: *std::libc::c_void) -> FontFace;
+  fn cairo_font_face_reference(self_value: *libc::c_void) -> FontFace;
 }
 
 impl std::ops::Drop for FontFace {
@@ -473,7 +474,7 @@ impl std::ops::Drop for FontFace {
 }
 
 extern {
-  fn cairo_font_face_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_font_face_destroy(self_value: *mut libc::c_void);
 }
 
 impl ScaledFont {
@@ -679,30 +680,30 @@ impl ScaledFont {
 
 extern {
   fn cairo_scaled_font_create(font_face: *mut FontFace, font_matrix: *super::matrix::Matrix, ctm: *super::matrix::Matrix, options: *mut Options) -> ScaledFont;
-  fn cairo_scaled_font_status(self_value: *mut std::libc::c_void) -> super::Status;
-  fn cairo_scaled_font_extents(self_value: *mut std::libc::c_void, extents: *mut FontExtents);
-  fn cairo_scaled_font_text_extents(self_value: *mut std::libc::c_void, utf8: *std::libc::c_char, extents: *mut TextExtents);
-  fn cairo_scaled_font_glyph_extents(self_value: *mut std::libc::c_void, glyphs: *Glyph, glyphs_length: i32, extents: *mut TextExtents);
-  fn cairo_scaled_font_get_font_face(self_value: *mut std::libc::c_void) -> FontFace;
-  fn cairo_scaled_font_get_font_options(self_value: *mut std::libc::c_void, options: FontExtents);
-  fn cairo_scaled_font_get_font_matrix(self_value: *mut std::libc::c_void, font_matrix: *mut super::matrix::Matrix);
-  fn cairo_scaled_font_get_ctm(self_value: *mut std::libc::c_void, ctm: *mut super::matrix::Matrix);
-  fn cairo_scaled_font_get_scale_matrix(self_value: *mut std::libc::c_void, scale_matrix: *mut super::matrix::Matrix);
-  fn cairo_scaled_font_get_type(self_value: *mut std::libc::c_void) -> font_type::FontType;
-  fn cairo_scaled_font_get_reference_count(self_value: *mut std::libc::c_void) -> i32;
+  fn cairo_scaled_font_status(self_value: *mut libc::c_void) -> super::Status;
+  fn cairo_scaled_font_extents(self_value: *mut libc::c_void, extents: *mut FontExtents);
+  fn cairo_scaled_font_text_extents(self_value: *mut libc::c_void, utf8: *libc::c_char, extents: *mut TextExtents);
+  fn cairo_scaled_font_glyph_extents(self_value: *mut libc::c_void, glyphs: *Glyph, glyphs_length: i32, extents: *mut TextExtents);
+  fn cairo_scaled_font_get_font_face(self_value: *mut libc::c_void) -> FontFace;
+  fn cairo_scaled_font_get_font_options(self_value: *mut libc::c_void, options: FontExtents);
+  fn cairo_scaled_font_get_font_matrix(self_value: *mut libc::c_void, font_matrix: *mut super::matrix::Matrix);
+  fn cairo_scaled_font_get_ctm(self_value: *mut libc::c_void, ctm: *mut super::matrix::Matrix);
+  fn cairo_scaled_font_get_scale_matrix(self_value: *mut libc::c_void, scale_matrix: *mut super::matrix::Matrix);
+  fn cairo_scaled_font_get_type(self_value: *mut libc::c_void) -> font_type::FontType;
+  fn cairo_scaled_font_get_reference_count(self_value: *mut libc::c_void) -> i32;
 }
 
 impl std::clone::Clone for ScaledFont {
   fn clone(&self) -> ScaledFont {
     unsafe {
-      let foreign_result = cairo_scaled_font_reference(self.opaque as *std::libc::c_void);
+      let foreign_result = cairo_scaled_font_reference(self.opaque as *libc::c_void);
       return foreign_result;
     }
   }
 }
 
 extern {
-  fn cairo_scaled_font_reference(self_value: *std::libc::c_void) -> ScaledFont;
+  fn cairo_scaled_font_reference(self_value: *libc::c_void) -> ScaledFont;
 }
 
 impl std::ops::Drop for ScaledFont {
@@ -714,7 +715,7 @@ impl std::ops::Drop for ScaledFont {
 }
 
 extern {
-  fn cairo_scaled_font_destroy(self_value: *mut std::libc::c_void);
+  fn cairo_scaled_font_destroy(self_value: *mut libc::c_void);
 }
 
 pub mod cluster_flags;
